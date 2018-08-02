@@ -121,21 +121,22 @@ app.post('/deleteItem', function (req, res) {
 
 
 */
-const con = mysql.createConnection({
+/*const con = mysql.createConnection({
     host: '127.0.0.1',
     user: 'kashif',
     password: 'tgbyhnujm',
     database: 'mydb'
-});
+});*/
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+//user side start
 //checking number in database  First Step
 
-app.post('/checkPhone', function (req, res) {
+/*app.post('/checkPhone', function (req, res) {
     console.log(req.body.phone);
     
 
-    var check = "select * from userinfo where phoneno=033505421" ;
+    var check = "select * from userinfo where phoneno=" + mysql.escape(req.body.phone) ;
     con.query(check, req.body.phone, function (err, result) {
         //console.log(con.query);
         if (err) throw err;
@@ -156,23 +157,29 @@ app.get('/SendUserData', function (req, res) {
     console.log("yes");
     var sendData = "select  name,phoneno,location from userinfo where phoneno=?" + req.body.phone;
     con.query(sendData, function (err, result) {
-        if (err) throw err;
+        if (err)  res.send(err);
         res.send(result);
     })
-})
+})*/
 
 //send menu items to user step 3
 app.get('/Items', function (req, res) {
-    var items = "select * from item where _catid=?" + req.body.cat;
+    
+    res.send([{ "name": 1, "image": "R.drawable.milk__", "quantity": "1", "description": "any thing", "price": "120", "measuring_unit": "litre" }]);
+   /* var items = "select * from subcat" ;
+
     con.query(items, function (err, result) {
         if (err) throw err;
         res.send(result);
-    })
+        console.log(result);
+    })*/
 })
 //check out step 4
 app.post('/checkOut', function (req, res) {
     var order_Insert = "Insert into order set values ?";
 })
+//user side end
+
 /*
 
 app.post('/notified', function (req, res) {
