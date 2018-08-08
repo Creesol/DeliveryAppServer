@@ -132,11 +132,24 @@ app.use(bodyParser.json());
 //user side start
 //checking number in database  First Step
 
-/*app.post('/checkPhone', function (req, res) {
-    console.log(req.body.phone);
+app.get('/checkPhone', function (req, res) {
+    console.log(req.query.phoneNo);
+    var number = "03045192218";
+
+    if (req.query.phoneNo  == number) {
+        res.send("1");
+    }
+    else {
+
+    
+        res.send("4");
+    }
     
 
-    var check = "select * from userinfo where phoneno=" + mysql.escape(req.body.phone) ;
+    })
+    
+
+   /* var check = "select * from userinfo where phoneno=" + mysql.escape(req.query.phone) ;
     con.query(check, req.body.phone, function (err, result) {
         //console.log(con.query);
         if (err) throw err;
@@ -146,13 +159,14 @@ app.use(bodyParser.json());
         }
         
         res.send("2");
-    })
+    })*/
     
     
 
 
-})
+
 //send user_data to app step 2
+/*
 app.get('/SendUserData', function (req, res) {
     console.log("yes");
     var sendData = "select  name,phoneno,location from userinfo where phoneno=?" + req.body.phone;
@@ -165,7 +179,7 @@ app.get('/SendUserData', function (req, res) {
 //send menu items to user step 3
 app.get('/Items', function (req, res) {
     
-    res.send([{ "name": 1, "image": "R.drawable.milk__", "quantity": "1", "description": "any thing", "price": "120", "measuring_unit": "litre" }]);
+    res.send([{ "name": 1, "image": "R.drawable.milk__", "quantity": "1", "description": "any thing", "price": "120", "measuring_unit": "litre" }, { "name": 1, "image": "R.drawable.milk__", "quantity": "1", "description": "any thing", "price": "120", "measuring_unit": "litre" }, { "name": 1, "image": "R.drawable.milk__", "quantity": "1", "description": "any thing", "price": "120", "measuring_unit": "litre" }, { "name": 1, "image": "R.drawable.milk__", "quantity": "1", "description": "any thing", "price": "120", "measuring_unit": "litre" }, { "name": 1, "image": "R.drawable.milk__", "quantity": "1", "description": "any thing", "price": "120", "measuring_unit": "litre" }]);
    /* var items = "select * from subcat" ;
 
     con.query(items, function (err, result) {
@@ -177,6 +191,10 @@ app.get('/Items', function (req, res) {
 //check out step 4
 app.post('/checkOut', function (req, res) {
     var order_Insert = "Insert into order set values ?";
+})
+//  Get Status Code for order
+app.get('/OrderStatus', function (req, res) {
+    res.send("2");
 })
 //user side end
 
