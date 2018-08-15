@@ -127,7 +127,7 @@ const con = mysql.createConnection({
     password: 'Kashif123',
     database: 'mydb'
 });
-console.log(con.toString());
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 //user side start
