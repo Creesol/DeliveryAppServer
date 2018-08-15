@@ -121,16 +121,18 @@ app.post('/deleteItem', function (req, res) {
 
 
 */
-/*const con = mysql.createConnection({
-    host: '127.0.0.1',
-    user: 'kashif',
-    password: 'tgbyhnujm',
+const con = mysql.createConnection({
+    host: 'creesol.cz7pwzetgifa.ap-south-1.rds.amazonaws.com',
+    user: 'creesol_admin',
+    password: 'Kashif123',
     database: 'mydb'
-});*/
+});
+console.log(con.toString());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 //user side start
 //checking number in database  First Step
+
 
 app.get('/checkPhone', function (req, res) {
     console.log(req.query.phoneNo);
