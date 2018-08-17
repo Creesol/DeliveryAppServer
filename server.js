@@ -30,6 +30,7 @@ if(!err) {
     console.log("Error connecting database ... nn"); 
     console.log(err);
 }
+    con.end();
 });
 
 
