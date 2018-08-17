@@ -128,8 +128,8 @@ const con = mysql.createConnection({
     database: 'mydb'
 });
 
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+//app.use(bodyParser.urlencoded({ extended: false }));
+//app.use(bodyParser.json());
 //user side start
 //checking number in database  First Step
 
