@@ -122,7 +122,7 @@ app.post('/deleteItem', function (req, res) {
 
 */
 const con = mysql.createConnection({
-    host: 'knockdatabase.cz7pwzetgifa.ap-south-1.rds.amazonaws.com',
+    host: '13.232.147.28',
     user: 'creesol',
     password: 'creesol.com',
     database: 'mydb',
