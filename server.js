@@ -184,7 +184,8 @@ app.get('/Items', function (req, res) {
     res.send([{ "name": 1, "image": "R.drawable.milk__", "quantity": "1", "description": "any thing", "price": "120", "measuring_unit": "litre" }, { "name": 1, "image": "R.drawable.milk__", "quantity": "1", "description": "any thing", "price": "120", "measuring_unit": "litre" }, { "name": 1, "image": "R.drawable.milk__", "quantity": "1", "description": "any thing", "price": "120", "measuring_unit": "litre" }, { "name": 1, "image": "R.drawable.milk__", "quantity": "1", "description": "any thing", "price": "120", "measuring_unit": "litre" }, { "name": 1, "image": "R.drawable.milk__", "quantity": "1", "description": "any thing", "price": "120", "measuring_unit": "litre" }]);
    var items = "select * from category_detail" ;
     con.query(items, function (err, result) {
-        if (err) throw err;
+        if (err) 
+            console.log("error" + err);;
         res.send(err);
         console.log(result);
         console.log(result[0].item_id);
