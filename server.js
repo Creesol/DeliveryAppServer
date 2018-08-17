@@ -122,11 +122,10 @@ app.post('/deleteItem', function (req, res) {
 
 */
 const con = mysql.createConnection({
-    host: 'knockdatabase.cz7pwzetgifa.ap-south-1.rds.amazonaws.com',
+    host: 'knockdatabase.cz7pwzetgifa.ap-south-1.rds.amazonaws.com:3306',
     user: 'creesol',
     password: 'creesol.com',
-    database: 'mydb',
-    port: '3306'
+    database: 'mydb'
 });
 
 app.use(bodyParser.urlencoded({ extended: false }));
