@@ -20,13 +20,17 @@ const con = mysql.createConnection({
     port: 3306
 });
 
-con.connect(function(err){
+setTimeout(function(){
+     con.connect(function(err){
 if(!err) {
     console.log("Database is connected ... nn");    
 } else {
     console.log("Error connecting database ... nn");    
 }
 });
+}, 60000);
+
+
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
