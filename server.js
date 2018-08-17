@@ -191,6 +191,26 @@ app.get('/Items', function (req, res) {
         console.log(result);
     })*/
 })
+
+//send menu items to user step 3
+app.get('/Item', function (req, res) {
+    console.log("runnning");
+    var items = "select * from category_detail" ;
+
+    con.query(items, function (err, result) {
+        if (err) throw err;
+        console.log(result);
+        console.log(result[0].item_id);
+        
+        //res.send([{ "name": result[0].item_name, "image": result[0].itemname, "quantity": "1", "description": result[0].description, "price": result[0].updated_price, "measuring_unit": result[0].measuringunit }, { "name": 1, "image": "R.drawable.milk__", "quantity": "1", "description": "any thing", "price": "120", "measuring_unit": "litre" }, { "name": 1, "image": "R.drawable.milk__", "quantity": "1", "description": "any thing", "price": "120", "measuring_unit": "litre" }, { "name": 1, "image": "R.drawable.milk__", "quantity": "1", "description": "any thing", "price": "120", "measuring_unit": "litre" }, { "name": 1, "image": "R.drawable.milk__", "quantity": "1", "description": "any thing", "price": "120", "measuring_unit": "litre" }]);
+        res.send(result);
+        
+    })
+    
+    
+   /* */
+})
+
 //check out step 4
 app.post('/checkOut', function (req, res) {
     var order_Insert = "Insert into order set values ?";
