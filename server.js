@@ -19,7 +19,7 @@ var con = mysql.createConnection({
     database: 'mydb', 
     port: 3306,
     debug: true,
-    timeout: 60000
+    connectTimeout: 30000
 });
 
 
