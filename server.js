@@ -16,7 +16,8 @@ const con = mysql.createConnection({
     host: 'knockdatabase.cz7pwzetgifa.ap-south-1.rds.amazonaws.com',
     user: 'creesol',
     password: 'creesol.com',
-    database: 'mydb'
+    database: 'mydb', 
+    port: 3306
 });
 
 con.connect(function(err){
