@@ -17,7 +17,8 @@ const con = mysql.createConnection({
     user: 'creesol',
     password: 'creesol.com',
     database: 'mydb', 
-    port: 3306
+    port: '3306',
+    debug: true
 });
 
 setTimeout(function(){
