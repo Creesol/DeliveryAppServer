@@ -21,15 +21,15 @@ var con = mysql.createConnection({
     debug: true
 });
 
-setTimeout(function(){
-     con.connect(function(err){
+
+con.connect(function(err){
 if(!err) {
     console.log("Database is connected ... nn");    
 } else {
     console.log("Error connecting database ... nn");    
 }
 });
-}, 60000);
+
 
 
 
