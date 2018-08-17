@@ -185,6 +185,7 @@ app.get('/Items', function (req, res) {
    var items = "select * from category_detail" ;
     con.query(items, function (err, result) {
         if (err) throw err;
+        res.send(err);
         console.log(result);
         console.log(result[0].item_id);
         
