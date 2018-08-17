@@ -11,7 +11,23 @@ var FCM = require('fcm-push');
 
 var serverKey = 'AAAASgtMh-o:APA91bHlJlpKoH6Kk_hU4lWcMBOSYGwpg9fAQc1sT9KEZuTv6HeF6oaYGurT8yLzNqxAa30AP4NnLRWccYYshyU4OBFhpBx5USGMlKg0VYzzHXKnAwWAtMCddpMEWu0vAlVwgiaphzuOC3tBSXUAoGZduA6IMqIsug';
 var fcm = new FCM(serverKey);
-app. use(bodyParser.urlencoded({ extended: false }));
+
+const con = mysql.createConnection({
+    host: 'knockdatabase.cz7pwzetgifa.ap-south-1.rds.amazonaws.com',
+    user: 'creesol',
+    password: 'creesol.com',
+    database: 'mydb'
+});
+
+connection.connect(function(err){
+if(!err) {
+    console.log("Database is connected ... nn");    
+} else {
+    console.log("Error connecting database ... nn");    
+}
+});
+
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.listen(PORT, function (err) {
     if (err) {
@@ -121,12 +137,7 @@ app.post('/deleteItem', function (req, res) {
 
 
 */
-const con = mysql.createConnection({
-    host: 'knockdatabase.cz7pwzetgifa.ap-south-1.rds.amazonaws.com',
-    user: 'creesol',
-    password: 'creesol.com',
-    database: 'mydb'
-});
+
 
 //app.use(bodyParser.urlencoded({ extended: false }));
 //app.use(bodyParser.json());
