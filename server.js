@@ -1,11 +1,11 @@
-const express= require('express');
-const app= express();
-const PORT = process.env.PORT || 3000;
-const bodyParser = require('body-parser');
-const url = require('url');
-const querystring = require('querystring'); 
-const mysql = require('mysql');
-const admin = require('firebase-admin');
+var express= require('express');
+var app= express();
+var PORT = process.env.PORT || 3000;
+var bodyParser = require('body-parser');
+var url = require('url');
+var querystring = require('querystring'); 
+var mysql = require('mysql');
+var admin = require('firebase-admin');
 
 var FCM = require('fcm-push');
 
