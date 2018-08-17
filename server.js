@@ -211,7 +211,10 @@ app.get('/Item', function (req, res) {
 
     con.query(items, function (err, result) {
         console.log("runnning");
-        if (err) throw err;
+        if (err) {
+            console.log(err);
+            res.end();
+        }
         console.log(result);
         console.log(result[0].item_id);
         
