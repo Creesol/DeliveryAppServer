@@ -12,7 +12,7 @@ var FCM = require('fcm-push');
 var serverKey = 'AAAASgtMh-o:APA91bHlJlpKoH6Kk_hU4lWcMBOSYGwpg9fAQc1sT9KEZuTv6HeF6oaYGurT8yLzNqxAa30AP4NnLRWccYYshyU4OBFhpBx5USGMlKg0VYzzHXKnAwWAtMCddpMEWu0vAlVwgiaphzuOC3tBSXUAoGZduA6IMqIsug';
 var fcm = new FCM(serverKey);
 
-var con = mysql.createConnection({
+const con = mysql.createConnection({
     host: 'knockdatabase.cz7pwzetgifa.ap-south-1.rds.amazonaws.com',
     user: 'creesol',
     password: 'creesol.com',
