@@ -91,6 +91,16 @@ app.get('/handle', function(req,res){
     handle_database(query, req, res);
 });
 
+app.get('/getFruit', function(req,res){
+    var query = "select * from category_detail where sub_category_name = 'Fruit'";
+    handle_database(query, req, res);
+});
+
+app.get('/getVegetable', function(req,res){
+    var query = "select * from category_detail where sub_category_name = 'Fruit'";";
+    handle_database(query, req, res);
+});
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.listen(PORT, function (err) {
