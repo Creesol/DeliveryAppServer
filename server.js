@@ -12,7 +12,8 @@ var FCM = require('fcm-push');
 var serverKey = 'AAAASgtMh-o:APA91bHlJlpKoH6Kk_hU4lWcMBOSYGwpg9fAQc1sT9KEZuTv6HeF6oaYGurT8yLzNqxAa30AP4NnLRWccYYshyU4OBFhpBx5USGMlKg0VYzzHXKnAwWAtMCddpMEWu0vAlVwgiaphzuOC3tBSXUAoGZduA6IMqIsug';
 var fcm = new FCM(serverKey);
 
-var con = mysql.createConnection({
+var con = mysql.createPool({
+    connectionLimit : 10,
     host: 'knockdatabase.cz7pwzetgifa.ap-south-1.rds.amazonaws.com',
     user: 'creesol',
     password: 'creesol.com',
@@ -59,6 +60,36 @@ app.get('/category', function (req, res) {
     
 });
 */
+
+
+function handle_database(query,req,res) {
+    
+    con.getConnection(function(err,connection){
+        if (err) {
+          res.json({"code" : 100, "status" : "Error in connection database"});
+          return;
+        }   
+
+        console.log('connected as id ' + connection.threadId);
+        
+        connection.query(query,function(err,rows){
+            connection.release();
+            if(!err) {
+                res.json(rows);
+            }           
+        });
+
+        connection.on('error', function(err) {      
+              res.json({"code" : 100, "status" : "Error in connection database"});
+              return;     
+        });
+  });
+}
+
+app.get('/handle', function(req,res){
+    var query = "select * from category_detail";
+    handle_database(query, req, res);
+});
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
