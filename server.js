@@ -225,7 +225,7 @@ app.get('/SendUserData', function (req, res) {
 //send menu items to user step 3
 app.get('/Items', function (req, res) {
     
-    res.send([{ "name": 1, "image": "R.drawable.milk__", "quantity": "1", "description": "any thing", "price": "120", "measuring_unit": "litre" }, { "name": 1, "image": "R.drawable.milk__", "quantity": "1", "description": "any thing", "price": "120", "measuring_unit": "litre" }, { "name": 1, "image": "R.drawable.milk__", "quantity": "1", "description": "any thing", "price": "120", "measuring_unit": "litre" }, { "name": 1, "image": "R.drawable.milk__", "quantity": "1", "description": "any thing", "price": "120", "measuring_unit": "litre" }, { "name": 1, "image": "R.drawable.milk__", "quantity": "1", "description": "any thing", "price": "120", "measuring_unit": "litre" }]);
+    //res.send([{ "name": 1, "image": "R.drawable.milk__", "quantity": "1", "description": "any thing", "price": "120", "measuring_unit": "litre" }, { "name": 1, "image": "R.drawable.milk__", "quantity": "1", "description": "any thing", "price": "120", "measuring_unit": "litre" }, { "name": 1, "image": "R.drawable.milk__", "quantity": "1", "description": "any thing", "price": "120", "measuring_unit": "litre" }, { "name": 1, "image": "R.drawable.milk__", "quantity": "1", "description": "any thing", "price": "120", "measuring_unit": "litre" }, { "name": 1, "image": "R.drawable.milk__", "quantity": "1", "description": "any thing", "price": "120", "measuring_unit": "litre" }]);
    var items = "select * from category_detail" ;
     con.query(items, function (err, result) {
         
@@ -239,13 +239,6 @@ app.get('/Items', function (req, res) {
         res.send(result);
         
     })
-    /* var items = "select * from subcat" ;
-
-    con.query(items, function (err, result) {
-        if (err) throw err;
-        res.send(result);
-        console.log(result);
-    })*/
 })
 
 //send menu items to user step 3
