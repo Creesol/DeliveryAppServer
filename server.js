@@ -40,7 +40,21 @@ exports.handler = (event, context, callback) => {
 };
 
 
-
+exports.handler =  (event, context, callback) => {
+  //prevent timeout from waiting event loop
+  context.callbackWaitsForEmptyEventLoop = false;
+  pool.getConnection(function(err, connection) {
+    // Use the connection
+      var items = "select * from category_detail" ;
+    connection.query(items, function (error, results, fields) {
+      // And done with the connection.
+      connection.release();
+      // Handle error after the release.
+      if (error) callback(error);
+      else callback(null,results[0].emp_name);
+    });
+  });
+};
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
