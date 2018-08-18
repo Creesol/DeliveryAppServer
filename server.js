@@ -39,8 +39,9 @@ exports.handler = (event, context, callback) => {
         });
 };
 
-
-exports.handler =  (event, context, callback) => {
+app.get('/category', function (req, res) {
+    
+    exports.handler =  (event, context, callback) => {
   //prevent timeout from waiting event loop
   context.callbackWaitsForEmptyEventLoop = false;
   pool.getConnection(function(err, connection) {
@@ -51,10 +52,13 @@ exports.handler =  (event, context, callback) => {
       connection.release();
       // Handle error after the release.
       if (error) callback(error);
-      else callback(null,results[0].emp_name);
+      else callback(null,res.send(results));
     });
   });
 };
+    
+});
+
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
