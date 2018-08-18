@@ -23,7 +23,7 @@ var con = mysql.createConnection({
     acquireTimeout: 30000
 });
 
-exports.handler = (event, context, callback) -> {
+exports.handler = (event, context, callback) => {
     context.callbackWaitsForEmptyEventLoop = false;
     con.connect(function(err){
     
