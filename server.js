@@ -97,7 +97,7 @@ app.get('/getFruit', function(req,res){
 });
 
 app.get('/getVegetable', function(req,res){
-    var query = "select * from category_detail where sub_category_name = 'Fruit'";
+    var query = "select * from category_detail where sub_category_name = 'Vegetable'";
     handle_database(query, req, res);
 });
 
