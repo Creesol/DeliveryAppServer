@@ -38,7 +38,7 @@ exports.handler = (event, context, callback) => {
             con.end();
         });
 };
-
+/*
 app.get('/category', function (req, res) {
     
     exports.handler =  (event, context, callback) => {
@@ -58,7 +58,7 @@ app.get('/category', function (req, res) {
 };
     
 });
-
+*/
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
