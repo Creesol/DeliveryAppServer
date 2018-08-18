@@ -231,7 +231,7 @@ app.get('/Items', function (req, res) {
         
         if (err) 
             console.log("error" + err);;
-        res.send(err);
+        //res.send(err);
         console.log(result);
         console.log(result[0].item_id);
         
