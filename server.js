@@ -23,17 +23,21 @@ var con = mysql.createConnection({
     acquireTimeout: 30000
 });
 
-
-con.connect(function(err){
+exports.handler = (event, context, callback) -> {
+    context.callbackWaitsForEmptyEventLoop = false;
+    con.connect(function(err){
     
-if(!err) {
-    console.log("Database is connected ... nn");    
-} else {
-    console.log("Error connecting database ... nn"); 
-    console.log(err);
-}
-    con.end();
-});
+        if(!err) {
+            callback(null, "abc");
+            console.log("Database is connected ... nn");    
+        } else {
+            callback(err);
+            console.log("Error connecting database ... nn"); 
+            console.log(err);
+        }
+            con.end();
+        });
+};
 
 
 
