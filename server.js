@@ -112,7 +112,7 @@ app.get('/getAllVegetable', function(req,res){
 });
 
 app.get('/getChicken', function(req,res){
-    var query = "select * from category_detail where sub_category_name = 'Chicken' LIMIT 3";
+    var query = "select * from category_detail where sub_category_name = 'Chicken' LIMIT 4";
     handle_database(query, req, res);
 });
 
