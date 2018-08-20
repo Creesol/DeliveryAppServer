@@ -111,6 +111,16 @@ app.get('/getAllVegetable', function(req,res){
     handle_database(query, req, res);
 });
 
+app.get('/getChicken', function(req,res){
+    var query = "select * from category_detail where sub_category_name = 'Chicken' LIMIT 6";
+    handle_database(query, req, res);
+});
+
+app.get('/getAllChicken', function(req,res){
+    var query = "select * from category_detail where sub_category_name = 'Chicken'";
+    handle_database(query, req, res);
+});
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.listen(PORT, function (err) {
