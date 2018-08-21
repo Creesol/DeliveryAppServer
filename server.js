@@ -91,6 +91,11 @@ app.get('/handle', function(req,res){
     handle_database(query, req, res);
 });
 
+app.get('/getDairy', function(req,res){
+    var query = "select * from category_detail where sub_category_name = 'Dairy'";
+    handle_database(query, req, res);
+});
+
 app.get('/getBeef', function(req,res){
     var query = "select * from category_detail where sub_category_name = 'Beef' LIMIT 6";
     handle_database(query, req, res);
