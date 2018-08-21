@@ -127,7 +127,7 @@ app.get('/getDairySlider', function(req,res){
 });
 
 app.get('/getMeatSlider', function(req,res){
-    var query = "select * from Sliders where slider_category = 'Meat'
+    var query = "select * from Sliders where slider_category = 'Meat'"
     handle_database(query, req, res);
 });
 
