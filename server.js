@@ -91,6 +91,26 @@ app.get('/handle', function(req,res){
     handle_database(query, req, res);
 });
 
+app.get('/getBeef', function(req,res){
+    var query = "select * from category_detail where sub_category_name = 'Beef' LIMIT 6";
+    handle_database(query, req, res);
+});
+
+app.get('/getAllBeef', function(req,res){
+    var query = "select * from category_detail where sub_category_name = 'Beef'";
+    handle_database(query, req, res);
+});
+
+app.get('/getMutton', function(req,res){
+    var query = "select * from category_detail where sub_category_name = 'Mutton' LIMIT 6";
+    handle_database(query, req, res);
+});
+
+app.get('/getAllMutton', function(req,res){
+    var query = "select * from category_detail where sub_category_name = 'Mutton'";
+    handle_database(query, req, res);
+});
+
 app.get('/getFruit', function(req,res){
     var query = "select * from category_detail where sub_category_name = 'Fruit' LIMIT 6";
     handle_database(query, req, res);
