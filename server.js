@@ -121,6 +121,21 @@ app.get('/getAllChicken', function(req,res){
     handle_database(query, req, res);
 });
 
+app.get('/getDairySlider', function(req,res){
+    var query = "select * from Sliders where slider_category = 'Dairy'";
+    handle_database(query, req, res);
+});
+
+app.get('/getMeatSlider', function(req,res){
+    var query = "select * from Sliders where slider_category = 'Meat'
+    handle_database(query, req, res);
+});
+
+app.get('/getVegSlider', function(req,res){
+    var query = "select * from Sliders where slider_category = 'Veg'";
+    handle_database(query, req, res);
+});
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.listen(PORT, function (err) {
