@@ -7,6 +7,9 @@ const querystring = require('querystring');
 const mysql = require('mysql');
 const admin = require('firebase-admin');
 
+const http = require('http');
+var server = http.createServer(app);
+
 var FCM = require('fcm-push');
 
 var serverKey = 'AAAASgtMh-o:APA91bHlJlpKoH6Kk_hU4lWcMBOSYGwpg9fAQc1sT9KEZuTv6HeF6oaYGurT8yLzNqxAa30AP4NnLRWccYYshyU4OBFhpBx5USGMlKg0VYzzHXKnAwWAtMCddpMEWu0vAlVwgiaphzuOC3tBSXUAoGZduA6IMqIsug';
@@ -176,6 +179,11 @@ app.get('/getLaundrySlider', function(req,res){
     handle_database(query, req, res);
 });
 
+server.listen(5000,'172.31.24.36');
+console.log('Server is running');
+
+
+/*
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.listen(PORT, function (err) {
@@ -185,7 +193,7 @@ app.listen(PORT, function (err) {
     else {
         console.log("listening");
     }
-})
+})*/
 /*
 app.get('/noti', function (req, res) {
     var message = {
