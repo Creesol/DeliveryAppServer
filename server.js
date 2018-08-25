@@ -146,6 +146,16 @@ app.get('/getAllChicken', function(req,res){
     handle_database(query, req, res);
 });
 
+app.get('/getDryClean', function(req,res){
+    var query = "select * from category_detail where sub_category_name = 'Dry Clean' LIMIT 6";
+    handle_database(query, req, res);
+});
+
+app.get('/getAllDryClean', function(req,res){
+    var query = "select * from category_detail where sub_category_name = 'Dry Clean'";
+    handle_database(query, req, res);
+});
+
 app.get('/getDairySlider', function(req,res){
     var query = "select * from Sliders where slider_category = 'Dairy'";
     handle_database(query, req, res);
@@ -158,6 +168,11 @@ app.get('/getMeatSlider', function(req,res){
 
 app.get('/getVegSlider', function(req,res){
     var query = "select * from Sliders where slider_category = 'Veg'";
+    handle_database(query, req, res);
+});
+
+app.get('/getLaundrySlider', function(req,res){
+    var query = "select * from Sliders where slider_category = 'Laundry'";
     handle_database(query, req, res);
 });
 
