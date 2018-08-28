@@ -304,13 +304,13 @@ app.get('/CheckNumber', function (req, res) {
                         code: "1"
                     };
                     
-                    res.send(status);
+                    res.json(status);
                 }
                 var status2 = {
                     code: "2"
                 };
 
-                res.send(status2);
+                res.json(status2);
 
             }
         })
