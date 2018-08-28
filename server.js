@@ -11,6 +11,16 @@ var FCM = require('fcm-push');
 
 var serverKey = 'AAAASgtMh-o:APA91bHlJlpKoH6Kk_hU4lWcMBOSYGwpg9fAQc1sT9KEZuTv6HeF6oaYGurT8yLzNqxAa30AP4NnLRWccYYshyU4OBFhpBx5USGMlKg0VYzzHXKnAwWAtMCddpMEWu0vAlVwgiaphzuOC3tBSXUAoGZduA6IMqIsug';
 var fcm = new FCM(serverKey);
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.listen(PORT, function (err) {
+    if (err) {
+        console.log("error" + err);
+    }
+    else {
+        console.log("listening");
+    }
+})
 
 var con = mysql.createPool({
     connectionLimit : 10,
@@ -86,6 +96,7 @@ function handle_database(query,req,res) {
   });
 }
 
+
 app.get('/handle', function(req,res){
     var query = "select * from category_detail";
     handle_database(query, req, res);
@@ -160,17 +171,144 @@ app.get('/getVegSlider', function(req,res){
     var query = "select * from Sliders where slider_category = 'Veg'";
     handle_database(query, req, res);
 });
+app.post('/postOrderData', function (req, res) {
+    console.log("yes 1");
+    //var name = req.body.name;
 
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-app.listen(PORT, function (err) {
-    if (err) {
-        console.log("error" + err);
-    }
-    else {
-        console.log("listening");
-    }
-})
+    var phone_number = req.body.phone_number;
+    var orderStatus = 1;
+    /*
+    var Longitude = req.body.Longitude;
+    var Latitude = req.body.Latitude;
+    var total_price = req.body.total_price;
+    var current_time = req.body.current_time;
+    var address = req.body.Address;
+    var name = req.body.name;
+    var user_id = req.body.user_id;
+    
+    /*var query = "Insert into order(phoneno,longitude,latitude,total_price,orderdate,address,orderStatus) values ?";
+    var data = [phone_number, Longitude, Latitude, total_price, current_time, address, orderStatus];
+    //("phone_number", "Longitude", "Latitude", "total_price", "current_time", "address", "orderStatus")";*/
+    var query2 = "Insert into mydb.order(phoneno,orderStatus) values (" +phone_number + "," + orderStatus + ")";
+    //+ mysql.escape(phone_number, name, orderStatus) + ")";
+  // var data2 = [phone_number, orderStatus];
+
+    con.getConnection(function (err, connection) {
+        if (err) {
+           // console.log(err);
+            res.json({ "code": 100, "status": "Error in connection database" });
+            return;
+        }
+
+        console.log('connected as id ' + connection.threadId);
+
+        connection.query(query2,  function (err, rows) {
+            connection.release();
+            if (!err) {
+                //res.json(rows);
+                //var query="insert into "
+
+            }
+        })
+
+        connection.on('error', function (err) {
+            res.json({ "code": 100, "status": "Error in connection database2" });
+            return;
+        });
+    });
+});
+
+    /*name
+    phone_number
+    Longitude
+    Latitude
+    item_id
+    total_price
+    current_time
+    Address
+
+});
+*/
+app.get('/getUserData', function (req, res) {
+    var sql = "select * from user_info where phone_no=" + mysql.escape(req.query.phone);
+    con.getConnection(function (err, connection) {
+        if (err) {
+            res.json({ "code": 100, "status": "Error in connection database" });
+            return;
+        }
+
+        console.log('connected as id ' + connection.threadId);
+
+        connection.query(sql, function (err, result) {
+            connection.release();
+            if (!err) {
+                res.send(result);
+            }
+        });
+
+        connection.on('error', function (err) {
+            res.json({ "code": 100, "status": "Error in connection database" });
+            return;
+        });
+    });
+
+});
+
+/*app.get('/getOrderData', function (req, res) {
+OrderStatus
+    total_Price
+     order_id
+    order_date
+    order_Items
+    delivery_before
+
+});*/
+
+app.get('/CheckNumber', function (req, res) {
+    var check = "select * from user_info where phone_no=" + mysql.escape(req.query.phone);
+    con.getConnection(function (err, connection) {
+        if (err) {
+            // console.log(err);
+            res.json({ "code": 100, "status": "Error in connection database" });
+            return;
+        }
+
+        console.log('connected as id ' + connection.threadId);
+
+        connection.query(check, function (err, result) {
+            connection.release();
+            if (!err) {
+                
+                if (result.length > 0) {
+                    console.log(result.length);
+                    res.send("1");
+                }
+
+                res.send("2");
+
+            }
+        })
+
+        connection.on('error', function (err) {
+            res.json({ "code": 100, "status": "Error in connection database2" });
+            return;
+        });
+    });
+    
+    
+
+
+
+});
+/*
+app.post('/postOrderData2', function (req, res) {
+    res.send("yes");
+});
+app.get('/', function (req, res) {
+    res.send(PORT);
+});
+
+
 /*
 app.get('/noti', function (req, res) {
     var message = {
@@ -279,21 +417,9 @@ app.post('/deleteItem', function (req, res) {
 //checking number in database  First Step
 
 
-app.get('/checkPhone', function (req, res) {
-    console.log(req.query.phoneNo);
-    var number = "03045192218";
-
-    if (req.query.phoneNo  == number) {
-        res.send("1");
-    }
-    else {
-
-    
-        res.send("4");
-    }
-    
-
-    })
+    app.get('/checkPhone', function (req, res) {
+       
+    });
     
 
    /* var check = "select * from userinfo where phoneno=" + mysql.escape(req.query.phone) ;
@@ -390,7 +516,8 @@ app.post('/notified', function (req, res) {
         res.send("no");
     }
 
-    
+   
+String uriPostUserData = "http://ec2-13-232-147-28.ap-south-1.compute.amazonaws.com:5000/postUserData"; public static String uriCheckNumber = "http://ec2-13-232-147-28.ap-south-1.compute.amazonaws.com:5000/getCheckNumber"; public static String uriGetUserData = "http://ec2-13-232-147-28.ap-south-1.compute.amazonaws.com:5000/getUserData"; public static String uriPostOrderData = "http://ec2-13-232-147-28.ap-south-1.compute.amazonaws.com:5000/postOrderData"; public static String uriGetOrderData = "http://ec2-13-232-147-28.ap-south-1.compute.amazonaws.com:5000/getOrderData"; c
        
     
 
@@ -442,7 +569,7 @@ app.listen(PORT, function (err) {
         console.log("error" + err);
     };
 })
-/*
+
 app.get('/driverDelivery', function (req, res) {
    
 })
@@ -505,7 +632,7 @@ app.get('/menuUpdate/check'), function (req, res) {
 
 
 
-/*app.get('/insertItems', function (req, res) {
+app.get('/insertItems', function (req, res) {
     
     var Category_id = req.query.Cat_id;
     var SubCategory_name = req.query.Sub_name;
@@ -584,7 +711,7 @@ app.get(function (req, res) {
 });
 function sendOrderDetails(detail) {
    
+    
 
-
-}
-*/
+}*/
+    
