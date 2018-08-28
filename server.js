@@ -16,6 +16,7 @@ var serverKey = 'AAAASgtMh-o:APA91bHlJlpKoH6Kk_hU4lWcMBOSYGwpg9fAQc1sT9KEZuTv6He
 var fcm = new FCM(serverKey);
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+/*
 app.listen(PORT, function (err) {
     if (err) {
         console.log("error" + err);
@@ -23,7 +24,7 @@ app.listen(PORT, function (err) {
     else {
         console.log("listening");
     }
-})
+})*/
 
 var con = mysql.createPool({
     connectionLimit : 10,
@@ -329,6 +330,7 @@ app.get('/getLaundrySlider', function(req,res){
     var query = "select * from Sliders where slider_category = 'Laundry'";
     handle_database(query, req, res);
 });
+*/
 
 server.listen(5000,'172.31.24.36');
 console.log('Server is running');
