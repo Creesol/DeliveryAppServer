@@ -14,6 +14,7 @@ var FCM = require('fcm-push');
 
 var serverKey = 'AAAASgtMh-o:APA91bHlJlpKoH6Kk_hU4lWcMBOSYGwpg9fAQc1sT9KEZuTv6HeF6oaYGurT8yLzNqxAa30AP4NnLRWccYYshyU4OBFhpBx5USGMlKg0VYzzHXKnAwWAtMCddpMEWu0vAlVwgiaphzuOC3tBSXUAoGZduA6IMqIsug';
 var fcm = new FCM(serverKey);
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 /*
@@ -26,6 +27,7 @@ app.listen(PORT, function (err) {
     }
 })*/
 
+
 var con = mysql.createPool({
     connectionLimit : 10,
     host: 'knockdatabase.cz7pwzetgifa.ap-south-1.rds.amazonaws.com',
@@ -37,6 +39,9 @@ var con = mysql.createPool({
     connectTimeout: 30000,
     acquireTimeout: 30000
 });
+
+server.listen(5000,'172.31.24.36');
+console.log('Server is running');
 
 exports.handler = (event, context, callback) => {
     context.callbackWaitsForEmptyEventLoop = false;
@@ -295,10 +300,11 @@ app.get('/CheckNumber', function (req, res) {
                 
                 if (result.length > 0) {
                     console.log(result.length);
-                    res.send("1");
+                    var status = "1";
+                    res.send(status);
                 }
 
-                res.send("2");
+                res.send(status);
 
             }
         })
