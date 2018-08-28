@@ -301,10 +301,10 @@ app.get('/CheckNumber', function (req, res) {
                 if (result.length > 0) {
                     console.log(result.length);
                     var status = "1";
-                    res.send(status);
+                    res.sendStatus(status);
                 }
 
-                res.send(status);
+                res.sendStatus(status);
 
             }
         })
