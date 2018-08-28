@@ -261,7 +261,7 @@ app.get('/getUserData', function (req, res) {
         connection.query(sql, function (err, result) {
             connection.release();
             if (!err) {
-                res.json(result);
+                res.json(result[0]);
             }
         });
 
