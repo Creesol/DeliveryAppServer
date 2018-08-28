@@ -40,7 +40,7 @@ var con = mysql.createPool({
     acquireTimeout: 30000
 });
 
-server.listen(port,'172.31.24.36');
+server.listen(PORT,'172.31.24.36');
 console.log('Server is running');
 
 exports.handler = (event, context, callback) => {
