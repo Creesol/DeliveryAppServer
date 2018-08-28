@@ -7,6 +7,9 @@ const querystring = require('querystring');
 const mysql = require('mysql');
 const admin = require('firebase-admin');
 
+const http = require('http');
+var server = http.createServer(app);
+
 var FCM = require('fcm-push');
 
 var serverKey = 'AAAASgtMh-o:APA91bHlJlpKoH6Kk_hU4lWcMBOSYGwpg9fAQc1sT9KEZuTv6HeF6oaYGurT8yLzNqxAa30AP4NnLRWccYYshyU4OBFhpBx5USGMlKg0VYzzHXKnAwWAtMCddpMEWu0vAlVwgiaphzuOC3tBSXUAoGZduA6IMqIsug';
@@ -157,6 +160,16 @@ app.get('/getAllChicken', function(req,res){
     handle_database(query, req, res);
 });
 
+app.get('/getDryClean', function(req,res){
+    var query = "select * from category_detail where sub_category_name = 'Dry Clean' LIMIT 6";
+    handle_database(query, req, res);
+});
+
+app.get('/getAllDryClean', function(req,res){
+    var query = "select * from category_detail where sub_category_name = 'Dry Clean'";
+    handle_database(query, req, res);
+});
+
 app.get('/getDairySlider', function(req,res){
     var query = "select * from Sliders where slider_category = 'Dairy'";
     handle_database(query, req, res);
@@ -268,7 +281,7 @@ app.get('/CheckNumber', function (req, res) {
     var check = "select * from user_info where phone_no=" + mysql.escape(req.query.phone);
     con.getConnection(function (err, connection) {
         if (err) {
-            // console.log(err);
+             console.log(err);
             res.json({ "code": 100, "status": "Error in connection database" });
             return;
         }
@@ -304,10 +317,34 @@ app.get('/CheckNumber', function (req, res) {
 app.post('/postOrderData2', function (req, res) {
     res.send("yes");
 });
+*/
 app.get('/', function (req, res) {
     res.send(PORT);
 });
+/*
 
+<<<<<<< HEAD
+=======
+app.get('/getLaundrySlider', function(req,res){
+    var query = "select * from Sliders where slider_category = 'Laundry'";
+    handle_database(query, req, res);
+});
+
+server.listen(5000,'172.31.24.36');
+console.log('Server is running');
+
+
+/*
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.listen(PORT, function (err) {
+    if (err) {
+        console.log("error" + err);
+    }
+    else {
+        console.log("listening");
+    }
+})*/
 
 /*
 app.get('/noti', function (req, res) {
