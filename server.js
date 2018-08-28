@@ -221,11 +221,12 @@ app.post('/postOrderData', function (req, res) {
 
         console.log('connected as id ' + connection.threadId);
 
-        connection.query(query2,  function (err, rows) {
+        connection.query(query2,  function (err, results) {
             connection.release();
             if (!err) {
                 //res.json(rows);
                 //var query="insert into "
+                res.send(results.insertId);
 
             }
         })
