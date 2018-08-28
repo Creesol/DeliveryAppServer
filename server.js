@@ -1,6 +1,6 @@
 const express= require('express');
 const app= express();
-const PORT = process.env.PORT || 6000;
+const PORT = process.env.PORT || 5000;
 const bodyParser = require('body-parser');
 const url = require('url');
 const querystring = require('querystring'); 
@@ -14,16 +14,7 @@ var FCM = require('fcm-push');
 
 var serverKey = 'AAAASgtMh-o:APA91bHlJlpKoH6Kk_hU4lWcMBOSYGwpg9fAQc1sT9KEZuTv6HeF6oaYGurT8yLzNqxAa30AP4NnLRWccYYshyU4OBFhpBx5USGMlKg0VYzzHXKnAwWAtMCddpMEWu0vAlVwgiaphzuOC3tBSXUAoGZduA6IMqIsug';
 var fcm = new FCM(serverKey);
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-app.listen(PORT, function (err) {
-    if (err) {
-        console.log("error" + err);
-    }
-    else {
-        console.log("listening");
-    }
-})
+
 
 var con = mysql.createPool({
     connectionLimit : 10,
@@ -36,6 +27,9 @@ var con = mysql.createPool({
     connectTimeout: 30000,
     acquireTimeout: 30000
 });
+
+server.listen(5000,'172.31.24.36');
+console.log('Server is running');
 
 exports.handler = (event, context, callback) => {
     context.callbackWaitsForEmptyEventLoop = false;
