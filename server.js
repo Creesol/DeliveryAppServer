@@ -300,11 +300,17 @@ app.get('/CheckNumber', function (req, res) {
                 
                 if (result.length > 0) {
                     console.log(result.length);
-                    var status = "1";
-                    res.sendStatus(status);
+                    var status = {
+                        code: "1"
+                    };
+                    
+                    res.send(status);
                 }
+                var status2 = {
+                    code: "2"
+                };
 
-                res.sendStatus(status);
+                res.send(status2);
 
             }
         })
@@ -338,7 +344,7 @@ app.get('/getLaundrySlider', function(req,res){
 });
 */
 
-server.listen(5000,'172.31.24.36');
+server.listen(PORT);
 console.log('Server is running');
 
 
