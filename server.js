@@ -297,20 +297,25 @@ app.get('/CheckNumber', function (req, res) {
         connection.query(check, function (err, result) {
             connection.release();
             if (!err) {
-                
-                if (result.length > 0) {
-                    console.log(result.length);
-                    var status = {
-                        code: "1"
-                    };
-                    
-                    res.json(status);
-                }
                 var status2 = {
                     code: "2"
                 };
+                var status = {
+                    code: "1"
+                };
+                
+                if (result.length > 0) {
+                    console.log(result.length+"result lengtthh ");
 
-                res.json(status2);
+
+                    res.json(status);
+                } else {
+                    res.json(status2);
+
+                }
+                
+
+               
 
             }
         })
