@@ -191,24 +191,28 @@ app.get('/getVegSlider', function(req,res){
     handle_database(query, req, res);
 });
 app.post('/postOrderData', function (req, res) {
-    console.log("yes 1");
-    //var name = req.body.name;
+    console.log(req.body);
+    var name = req.body.name;
 
     var phone_number = req.body.phone_number;
     var orderStatus = 1;
-    /*
+    
+    
     var Longitude = req.body.Longitude;
     var Latitude = req.body.Latitude;
     var total_price = req.body.total_price;
     var current_time = req.body.current_time;
     var address = req.body.Address;
-    var name = req.body.name;
+    //var name = req.body.name;
     var user_id = req.body.user_id;
+    var item_detail = req.body.item_details;
+
     
-    /*var query = "Insert into order(phoneno,longitude,latitude,total_price,orderdate,address,orderStatus) values ?";
-    var data = [phone_number, Longitude, Latitude, total_price, current_time, address, orderStatus];
+
+    var query = "Insert into mydb.order(phoneno,longitude,latitude,total_price,orderdate,address,orderStatus) values (" + phone_number + "," + Longitude + "," + Latitude + "," + mysql.escape(total_price) + "," + mysql.escape( current_time) + "," +mysql.escape(address) + "," + orderStatus + ")";
+   // var data = [phone_number, Longitude, Latitude, total_price, current_time, address, orderStatus];
     //("phone_number", "Longitude", "Latitude", "total_price", "current_time", "address", "orderStatus")";*/
-    var query2 = "Insert into mydb.order(phoneno,orderStatus) values (" +phone_number + "," + orderStatus + ")";
+    //var query2 = "Insert into mydb.order(phoneno,orderStatus) values (" +phone_number + "," + orderStatus + ")";
     //+ mysql.escape(phone_number, name, orderStatus) + ")";
   // var data2 = [phone_number, orderStatus];
 
@@ -221,12 +225,41 @@ app.post('/postOrderData', function (req, res) {
 
         console.log('connected as id ' + connection.threadId);
 
-        connection.query(query2,  function (err, results) {
-            connection.release();
+        connection.query(query,  function (err, results) {
+            
             if (!err) {
                 //res.json(rows);
                 //var query="insert into "
-                res.send(results.insertId);
+               // var order_id = results.insertId;
+
+                var id = {
+                    order_id: results.insertId
+                }
+                // res.send(id);
+                for (var i = 0; i < item_detail.length; i++){
+                    var obj = item_detail[i];
+        
+
+                    var query3 = "Insert into mydb.order_detail(product_name,price,_order_id,quantity) values(" + mysql.escape(obj.item_name) + "," + mysql.escape(obj.item_price) + "," + results.insertId + "," + obj.item_quantity + ")";
+            connection.query(query3, function (err, results) {
+               
+                if (!err) {
+
+
+
+                    var detail_id = {
+                        detail_order: results.insertId
+                    }
+                    console.log(detail_id);
+                }
+                else {
+                    console.log(err);
+                }
+
+
+            })
+        }
+                    
 
             }
         })
