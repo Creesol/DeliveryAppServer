@@ -11,6 +11,7 @@ const http = require('http');
 var server = http.createServer(app);
 
 var FCM = require('fcm-push');
+var request = require('request');
 
 var serverKey = 'AAAASgtMh-o:APA91bHlJlpKoH6Kk_hU4lWcMBOSYGwpg9fAQc1sT9KEZuTv6HeF6oaYGurT8yLzNqxAa30AP4NnLRWccYYshyU4OBFhpBx5USGMlKg0VYzzHXKnAwWAtMCddpMEWu0vAlVwgiaphzuOC3tBSXUAoGZduA6IMqIsug';
 var fcm = new FCM(serverKey);
@@ -194,7 +195,7 @@ app.post('/postOrderData', function (req, res) {
     console.log(req.body);
     var name = req.body.name;
 
-    var phone_number = req.body.phone_number;
+    var user_id = req.body.user_id;
     var orderStatus = 1;
     
     
@@ -204,12 +205,12 @@ app.post('/postOrderData', function (req, res) {
     var current_time = req.body.current_time;
     var address = req.body.Address;
     //var name = req.body.name;
-    var user_id = req.body.user_id;
+    //var user_id = req.body.user_id;
     var item_detail = req.body.item_details;
 
     
 
-    var query = "Insert into mydb.order(phoneno,longitude,latitude,total_price,orderdate,address,orderStatus) values (" + phone_number + "," + Longitude + "," + Latitude + "," + mysql.escape(total_price) + "," + mysql.escape( current_time) + "," +mysql.escape(address) + "," + orderStatus + ")";
+    var query = "Insert into mydb.order(_user_id,longitude,latitude,total_price,orderdate,address,orderStatus) values (" + user_id + "," + Longitude + "," + Latitude + "," + mysql.escape(total_price) + "," + mysql.escape( current_time) + "," +mysql.escape(address) + "," + orderStatus + ")";
    // var data = [phone_number, Longitude, Latitude, total_price, current_time, address, orderStatus];
     //("phone_number", "Longitude", "Latitude", "total_price", "current_time", "address", "orderStatus")";*/
     //var query2 = "Insert into mydb.order(phoneno,orderStatus) values (" +phone_number + "," + orderStatus + ")";
@@ -283,7 +284,7 @@ app.post('/postOrderData', function (req, res) {
 });
 */
 app.get('/getUserData', function (req, res) {
-    var sql = "select * from user_info where phone_no=" + mysql.escape(req.query.phone);
+    var sql = "select * from user_info where user_id=" + mysql.escape(req.query.user_id);
     con.getConnection(function (err, connection) {
         if (err) {
             res.json({ "code": 100, "status": "Error in connection database" });
@@ -307,15 +308,52 @@ app.get('/getUserData', function (req, res) {
 
 });
 
-/*app.get('/getOrderData', function (req, res) {
-OrderStatus
-    total_Price
-     order_id
-    order_date
-    order_Items
-    delivery_before
+app.get('/getOrderData', function (req, res) {
+    var query1 = "select order_id from mydb.order  where _user_id=335";
+    con.getConnection(function (err, connection) {
+        if (err) {
+            res.json({ "code": 100, "status": "Error in connection database" });
+            return;
+        }
 
-});*/
+        console.log('connected as id ' + connection.threadId);
+
+        connection.query(query1, function (err, result) {
+            console.log(result);
+
+            
+            if (result.length > 0) {
+                var data = [];
+                var data2 = result.length;
+                for (var i = 0; i < result.length; i++) {
+                    console.log(result[i].order_id);
+                    var query2 = "select order_id,total_price,DATE_FORMAT(orderdate, '%Y-%m-%d') AS dated,DATE_FORMAT(orderdate,'%H:%i:%s') AS timed,COUNT(product_name) As total_items,orderStatus FROM mydb.order INNER JOIN order_detail on mydb.order.order_id=mydb.order_detail._order_id where order_id=(" + result[i].order_id + ")";
+                    connection.query(query2, function (err, result) {
+                        console.log(result[0]);
+
+                        data.push(result[0]);
+                        if (data.length == data2) {
+                            res.send(data);
+                        }
+                        console.log("data-----------------------------------------------------------------------------------------------------------------------" + data);
+
+                    });
+                   
+                   
+                }
+                //console.log("data222222222222222222222222222222222222222222222222222222222222222" + data[0].total_price);
+               
+                //res.send(JSON.stringify(data));
+            }
+            connection.release();
+        })
+        });
+
+    //var phone = req.body[0].user_id;
+    var query = "select order_id,total_price,DATE_FORMAT(orderdate, '%Y-%m-%d') AS dated,DATE_FORMAT(orderdate,'%H:%i:%s') AS timed,COUNT(product_name) As total_items FROM mydb.order INNER JOIN order_detail on mydb.order.order_id=mydb.order_detail._order_id where order_id=33";
+
+
+});
 
 app.get('/CheckNumber', function (req, res) {
     var check = "select * from user_info where phone_no=" + mysql.escape(req.query.phone);

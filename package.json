@@ -24,6 +24,7 @@
     "firebase-admin": "^5.12.1",
     "mysql": "^2.15.0",
     "querystring": "^0.2.0",
+    "request": "^2.87.0",
     "url": "^0.11.0"
   }
 }
