@@ -191,6 +191,26 @@ app.get('/getVegSlider', function(req,res){
     var query = "select * from Sliders where slider_category = 'Veg'";
     handle_database(query, req, res);
 });
+app.post('/postUserData', function (req, res) {
+    var query1 = "Insert into user_info(name,phone_no,token,email) values(" + req.body.name + "," + req.body.phone + "," + req.body.token + "," + req.body.email + ")";
+    con.getConnection(function (err, connection) {
+        if (err) {
+            // console.log(err);
+            res.json({ "code": 100, "status": "Error in connection database" });
+            return;
+        }
+
+        console.log('connected as id ' + connection.threadId);
+
+        connection.query(query1, function (err, results) {
+            res.send({ "user_id": results.insertId });
+
+            if (!err) {
+            }
+        });
+    });
+
+});
 app.post('/postOrderData', function (req, res) {
     console.log(req.body);
     var name = req.body.name;
@@ -284,7 +304,9 @@ app.post('/postOrderData', function (req, res) {
 });
 */
 app.get('/getUserData', function (req, res) {
-    var sql = "select * from user_info where user_id=" + mysql.escape(req.query.user_id);
+    //var sql = "select user_id from user_info where phoneno=" + mysql.escape(req.query.phone);
+    
+    var sql1 = "select * from user_info where phone_no=" + mysql.escape(req.query.phone);
     con.getConnection(function (err, connection) {
         if (err) {
             res.json({ "code": 100, "status": "Error in connection database" });
@@ -293,10 +315,27 @@ app.get('/getUserData', function (req, res) {
 
         console.log('connected as id ' + connection.threadId);
 
-        connection.query(sql, function (err, result) {
-            connection.release();
+        connection.query(sql1, function (err, result) {
+            //connection.release();
             if (!err) {
-                res.json(result[0]);
+                var data = result[0];
+                var user_id = data.user_id;
+                var update = "UPDATE user_info set token='25' where user_id="+mysql.escape(user_id);
+                connection.query(update, function (err, result) {
+                    if (!err) {
+                        res.json(data);
+                    }
+                    else {
+                        res.json({ "code": 100, "status": "Error in connection database" });
+
+                    }
+                })
+               // res.json();
+            }
+            else {
+                res.json({ "code": 100, "status": "Error in connection database" });
+                
+
             }
         });
 
@@ -309,7 +348,7 @@ app.get('/getUserData', function (req, res) {
 });
 
 app.get('/getOrderData', function (req, res) {
-    var query1 = "select order_id from mydb.order  where _user_id=335";
+    var query1 = "select order_id from mydb.order  where _user_id=" + mysql.escape(req.query.user_id);
     con.getConnection(function (err, connection) {
         if (err) {
             res.json({ "code": 100, "status": "Error in connection database" });
@@ -319,7 +358,7 @@ app.get('/getOrderData', function (req, res) {
         console.log('connected as id ' + connection.threadId);
 
         connection.query(query1, function (err, result) {
-            console.log(result);
+            console.log(result.length);
 
             
             if (result.length > 0) {
@@ -338,12 +377,15 @@ app.get('/getOrderData', function (req, res) {
                         console.log("data-----------------------------------------------------------------------------------------------------------------------" + data);
 
                     });
-                   
-                   
+
+
                 }
                 //console.log("data222222222222222222222222222222222222222222222222222222222222222" + data[0].total_price);
-               
+
                 //res.send(JSON.stringify(data));
+            }
+            else {
+                res.send("You havent Ordered anything");
             }
             connection.release();
         })
