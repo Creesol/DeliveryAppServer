@@ -320,7 +320,7 @@ app.get('/getUserData', function (req, res) {
             if (!err) {
                 var data = result[0];
                 var user_id = data.user_id;
-                var update = "UPDATE user_info set token='25' where user_id="+mysql.escape(user_id);
+                var update = "UPDATE user_info set token="+mysql.escape(req.query.token)+" where user_id="+mysql.escape(user_id);
                 connection.query(update, function (err, result) {
                     if (!err) {
                         res.json(data);
