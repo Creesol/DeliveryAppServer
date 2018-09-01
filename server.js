@@ -300,7 +300,7 @@ app.get('/getAllFrozenVeg', function (req, res) {
                             }
                             connection.query(query0, function (req, results) {
                                 if (!err) {
-                                    console.log(results);
+                                    sendNotification(results[0].token);
                                 }
 
                             })
