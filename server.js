@@ -357,8 +357,12 @@ app.get('/getOrderData', function (req, res) {
         }
 
         console.log('connected as id ' + connection.threadId);
+        console.log(query1);
 
         connection.query(query1, function (err, result) {
+            if (err) {
+                console.log(err);
+            }
             console.log(result.length);
 
             
@@ -387,6 +391,8 @@ app.get('/getOrderData', function (req, res) {
             }
             else {
                 res.send("You havent Ordered anything");
+                
+        
             }
             connection.release();
         })
