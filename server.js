@@ -221,20 +221,12 @@ app.get('/getAllFrozenVeg', function (req, res) {
         handle_database(query, req, res);
     });
 
-    app.post('/postUserData', function (req, res) {
-        var query1 = "Insert into user_info(name,phone_no,token,email) values(" + req.body.name + "," + req.body.phone + "," + req.body.token + "," + req.body.email + ")";
-        con.getConnection(function (err, connection) {
-            if (err) {
-                // console.log(err);
-                res.json({ "code": 100, "status": "Error in connection database" });
-                return;
-            }
+   
+  
 
-            app.get('/getLaundrySlider', function (req, res) {
-                var query = "select * from Sliders where slider_category = 'Laundry'";
-                handle_database(query, req, res);
-                console.log('4');
-            });
+
+
+          
 
             app.post('/postUserData', function (req, res) {
                 var query1 = "Insert into user_info(name,phone_no,token,email) values(" + req.body.name + "," + req.body.phone + "," + req.body.token + "," + req.body.email + ")";
@@ -257,7 +249,9 @@ app.get('/getAllFrozenVeg', function (req, res) {
                 });
 
             });
+            //});
             app.post('/postOrderData', function (req, res) {
+                res.send("connected");
                 console.log(req.body);
                 var name = req.body.name;
 
@@ -339,10 +333,8 @@ app.get('/getAllFrozenVeg', function (req, res) {
 
                 });
             })
-                    
-        })
             
-        });
+     
 
         
   
