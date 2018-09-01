@@ -178,6 +178,7 @@ app.get('/getFrozenVeg', function(req,res){
 app.get('/getAllFrozenVeg', function (req, res) {
     var query = "select * from category_detail where sub_category_name = 'FrozenVeg' LIMIT 9  OFFSET 9";
     handle_database(query, req, res);
+});
 
     app.get('/getChicken', function (req, res) {
         var query = "select * from category_detail where sub_category_name = 'Chicken' LIMIT 9";
@@ -343,12 +344,8 @@ app.get('/getAllFrozenVeg', function (req, res) {
             
         });
 
-        connection.on('error', function (err) {
-            res.json({ "code": 100, "status": "Error in connection database2" });
-            return;
-
-        });
-    });
+        
+  
 
 
     /*name
