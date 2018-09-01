@@ -323,7 +323,8 @@ app.get('/getUserData', function (req, res) {
                 var update = "UPDATE user_info set token="+mysql.escape(req.query.token)+" where user_id="+mysql.escape(user_id);
                 connection.query(update, function (err, result) {
                     if (!err) {
-                        res.json(data);
+                        sendNotification(req.query.token);
+                        //res.json(data);
                     }
                     else {
                         res.json({ "code": 100, "status": "Error in connection database" });
@@ -479,36 +480,40 @@ app.listen(PORT, function (err) {
     }
 })*/
 
-/*
-app.get('/noti', function (req, res) {
-    var message = {
-        "to": "cuknmgKE-lM:APA91bHM13WRcErBnjBSiMy3vNp3UFv0ofaF1YzH_iCe7WlGnibomjPFOrXT_eX3fXVpzFFcdzua3cMuSm_9Xf92VulhqQZUv6LTn1av_JHjjjjdsJD-C2XP8pVZYwL-OnjPaJZ-jQckBF6RDIp-hbcvGb-7MoQeWA",
-        "notification": {
-            "body": "Node js great match!",
-            "title": "Node js Portugal vs. Denmark",
-            "content_available": true,
-            "priority": "high",
-        },
-        "data": {
-            "body": "Node js great match!",
-            "title": "Node js Portugal vs. Denmark",
-            "content_available": true,
-            "priority": "high",
-        }
-    }
+function sendNotification(token) {
 
-    //callback style
 
-    fcm.send(message, function (err, response) {
-        if (err) {
-            console.log("Something has gone wrong!" + err);
-        } else {
-            console.log("Successfully sent with response: ", response);
+    app.get('/noti', function (req, res) {
+        var message = {
+            "to": token,
+            "notification": {
+                "body": "Node js great match!",
+                "title": "Node js Portugal vs. Denmark",
+                "content_available": true,
+                "priority": "high",
+            },
+            "data": {
+                "body": "Node js great match!",
+                "title": "Node js Portugal vs. Denmark",
+                "content_available": true,
+                "priority": "high",
+            }
         }
+
+        //callback style
+
+        fcm.send(message, function (err, response) {
+            if (err) {
+                console.log("Something has gone wrong!" + err);
+            } else {
+                console.log("Successfully sent with response: ", response);
+            }
+        });
     });
+}
 
     //promise style
-    fcm.send(message)
+   /* fcm.send(message)
         .then(function (response) {
             console.log("Successfully sent with response: ", response);
         })
@@ -517,7 +522,7 @@ app.get('/noti', function (req, res) {
             console.error(err);
         })
 
-})
+
 //Admin Part Start
 app.post('/AdminLogin', function (req, res) {
     var id = 243;
