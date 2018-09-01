@@ -18,6 +18,18 @@ var fcm = new FCM(serverKey);
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+var fs = require('fs');
+var check = require('syntax-error');
+
+var file = __dirname + '/server.js';
+var src = fs.readFileSync(file);
+
+var err = check(src, file);
+if (err) {
+    console.error('ERROR DETECTED' + Array(62).join('!'));
+    console.error(err);
+    console.error(Array(76).join('-'));
+}
 /*
 app.listen(PORT, function (err) {
     if (err) {
@@ -172,147 +184,148 @@ app.get('/getFrozenVeg', function(req,res){
     handle_database(query, req, res);
 });
 
-app.get('/getAllFrozenVeg', function(req,res){
+app.get('/getAllFrozenVeg', function (req, res) {
     var query = "select * from category_detail where sub_category_name = 'FrozenVeg' LIMIT 9  OFFSET 9";
     handle_database(query, req, res);
 
-app.get('/getChicken', function(req,res){
-    var query = "select * from category_detail where sub_category_name = 'Chicken' LIMIT 9";
-    handle_database(query, req, res);
-});
-
-app.get('/getAllChicken', function(req,res){
-    var query = "select * from category_detail where sub_category_name = 'Chicken' LIMIT 9  OFFSET 9";
-    handle_database(query, req, res);
-});
-
-app.get('/getDryClean', function(req,res){
-    var query = "select * from category_detail where sub_category_name = 'Dry Clean' LIMIT 9";
-    handle_database(query, req, res);
-});
-
-app.get('/getAllDryClean', function(req,res){
-    var query = "select * from category_detail where sub_category_name = 'Dry Clean' LIMIT 9  OFFSET 9";
-    handle_database(query, req, res);
-});
-
-app.get('/getDairySlider', function(req,res){
-    var query = "select * from Sliders where slider_category = 'Dairy'";
-    handle_database(query, req, res);
-});
-
-app.get('/getMeatSlider', function(req,res){
-    var query = "select * from Sliders where slider_category = 'Meat'"
-    handle_database(query, req, res);
-});
-
-app.get('/getVegSlider', function(req,res){
-    var query = "select * from Sliders where slider_category = 'Veg'";
-    handle_database(query, req, res);
-});
-
-app.get('/getLaundrySlider', function(req,res){
-    var query = "select * from Sliders where slider_category = 'Laundry'";
-    handle_database(query, req, res);
-});
-
-app.post('/postUserData', function (req, res) {
-    var query1 = "Insert into user_info(name,phone_no,token,email) values(" + req.body.name + "," + req.body.phone + "," + req.body.token + "," + req.body.email + ")";
-    con.getConnection(function (err, connection) {
-        if (err) {
-            // console.log(err);
-            res.json({ "code": 100, "status": "Error in connection database" });
-            return;
-        }
-
-        console.log('connected as id ' + connection.threadId);
-
-        connection.query(query1, function (err, results) {
-            res.send({ "user_id": results.insertId });
-
-            if (!err) {
-            }
-        });
+    app.get('/getChicken', function (req, res) {
+        var query = "select * from category_detail where sub_category_name = 'Chicken' LIMIT 9";
+        handle_database(query, req, res);
     });
 
-});
-app.post('/postOrderData', function (req, res) {
-    console.log(req.body);
-    var name = req.body.name;
+    app.get('/getAllChicken', function (req, res) {
+        var query = "select * from category_detail where sub_category_name = 'Chicken' LIMIT 9  OFFSET 9";
+        handle_database(query, req, res);
+    });
 
-    var user_id = req.body.user_id;
-    var orderStatus = 1;
-    
-    
-    var Longitude = req.body.Longitude;
-    var Latitude = req.body.Latitude;
-    var total_price = req.body.total_price;
-    var current_time = req.body.current_time;
-    var address = req.body.Address;
-    //var name = req.body.name;
-    //var user_id = req.body.user_id;
-    var item_detail = req.body.item_details;
+    app.get('/getDryClean', function (req, res) {
+        var query = "select * from category_detail where sub_category_name = 'Dry Clean' LIMIT 9";
+        handle_database(query, req, res);
+    });
 
-    
+    app.get('/getAllDryClean', function (req, res) {
+        var query = "select * from category_detail where sub_category_name = 'Dry Clean' LIMIT 9  OFFSET 9";
+        handle_database(query, req, res);
+    });
 
-    var query = "Insert into mydb.order(_user_id,longitude,latitude,total_price,orderdate,address,orderStatus) values (" + mysql.escape(user_id) + "," + Longitude + "," + Latitude + "," + mysql.escape(total_price) + "," + mysql.escape( current_time) + "," +mysql.escape(address) + "," + orderStatus + ")";
-   // var data = [phone_number, Longitude, Latitude, total_price, current_time, address, orderStatus];
-    //("phone_number", "Longitude", "Latitude", "total_price", "current_time", "address", "orderStatus")";*/
-    //var query2 = "Insert into mydb.order(phoneno,orderStatus) values (" +phone_number + "," + orderStatus + ")";
-    //+ mysql.escape(phone_number, name, orderStatus) + ")";
-  // var data2 = [phone_number, orderStatus];
+    app.get('/getDairySlider', function (req, res) {
+        var query = "select * from Sliders where slider_category = 'Dairy'";
+        handle_database(query, req, res);
+    });
 
-    con.getConnection(function (err, connection) {
-        if (err) {
-           // console.log(err);
-            res.json({ "code": 100, "status": "Error in connection database" });
-            return;
-        }
+    app.get('/getMeatSlider', function (req, res) {
+        var query = "select * from Sliders where slider_category = 'Meat'"
+        handle_database(query, req, res);
+    });
 
-        console.log('connected as id ' + connection.threadId);
+    app.get('/getVegSlider', function (req, res) {
+        var query = "select * from Sliders where slider_category = 'Veg'";
+        handle_database(query, req, res);
+    });
 
-        connection.query(query,  function (err, results) {
-            
-            if (!err) {
-                //res.json(rows);
-                //var query="insert into "
-               // var order_id = results.insertId;
+    app.get('/getLaundrySlider', function (req, res) {
+        var query = "select * from Sliders where slider_category = 'Laundry'";
+        handle_database(query, req, res);
+    });
 
-                var id = {
-                    order_id: results.insertId
-                }
-                // res.send(id);
-                for (var i = 0; i < item_detail.length; i++){
-                    var obj = item_detail[i];
-        
-
-                    var query3 = "Insert into mydb.order_detail(product_name,price,_order_id,quantity) values(" + mysql.escape(obj.item_name) + "," + mysql.escape(obj.item_price) + "," + results.insertId + "," + obj.item_quantity + ")";
-            connection.query(query3, function (err, results) {
-               
-                if (!err) {
-
-
-
-                    var detail_id = {
-                        detail_order: results.insertId
-                    }
-                    console.log(detail_id);
-                }
-                else {
-                    console.log(err);
-                }
-
-
-            })
-        }
-                    
-
+    app.post('/postUserData', function (req, res) {
+        var query1 = "Insert into user_info(name,phone_no,token,email) values(" + req.body.name + "," + req.body.phone + "," + req.body.token + "," + req.body.email + ")";
+        con.getConnection(function (err, connection) {
+            if (err) {
+                // console.log(err);
+                res.json({ "code": 100, "status": "Error in connection database" });
+                return;
             }
-        })
 
-        connection.on('error', function (err) {
-            res.json({ "code": 100, "status": "Error in connection database2" });
-            return;
+            console.log('connected as id ' + connection.threadId);
+
+            connection.query(query1, function (err, results) {
+                res.send({ "user_id": results.insertId });
+
+                if (!err) {
+                }
+            });
+        });
+
+    });
+    app.post('/postOrderData', function (req, res) {
+        console.log(req.body);
+        var name = req.body.name;
+
+        var user_id = req.body.user_id;
+        var orderStatus = 1;
+
+
+        var Longitude = req.body.Longitude;
+        var Latitude = req.body.Latitude;
+        var total_price = req.body.total_price;
+        var current_time = req.body.current_time;
+        var address = req.body.Address;
+        //var name = req.body.name;
+        //var user_id = req.body.user_id;
+        var item_detail = req.body.item_details;
+
+
+
+        var query = "Insert into mydb.order(_user_id,longitude,latitude,total_price,orderdate,address,orderStatus) values (" + mysql.escape(user_id) + "," + Longitude + "," + Latitude + "," + mysql.escape(total_price) + "," + mysql.escape(current_time) + "," + mysql.escape(address) + "," + orderStatus + ")";
+        // var data = [phone_number, Longitude, Latitude, total_price, current_time, address, orderStatus];
+        //("phone_number", "Longitude", "Latitude", "total_price", "current_time", "address", "orderStatus")";*/
+        //var query2 = "Insert into mydb.order(phoneno,orderStatus) values (" +phone_number + "," + orderStatus + ")";
+        //+ mysql.escape(phone_number, name, orderStatus) + ")";
+        // var data2 = [phone_number, orderStatus];
+
+        con.getConnection(function (err, connection) {
+            if (err) {
+                // console.log(err);
+                res.json({ "code": 100, "status": "Error in connection database" });
+                return;
+            }
+
+            console.log('connected as id ' + connection.threadId);
+
+            connection.query(query, function (err, results) {
+
+                if (!err) {
+                    //res.json(rows);
+                    //var query="insert into "
+                    // var order_id = results.insertId;
+
+                    var id = {
+                        order_id: results.insertId
+                    }
+                    // res.send(id);
+                    for (var i = 0; i < item_detail.length; i++) {
+                        var obj = item_detail[i];
+
+
+                        var query3 = "Insert into mydb.order_detail(product_name,price,_order_id,quantity) values(" + mysql.escape(obj.item_name) + "," + mysql.escape(obj.item_price) + "," + results.insertId + "," + obj.item_quantity + ")";
+                        connection.query(query3, function (err, results) {
+
+                            if (!err) {
+
+
+
+                                var detail_id = {
+                                    detail_order: results.insertId
+                                }
+                                console.log(detail_id);
+                            }
+                            else {
+                                console.log(err);
+                            }
+
+
+                        })
+                    }
+
+
+                }
+            })
+
+            connection.on('error', function (err) {
+                res.json({ "code": 100, "status": "Error in connection database2" });
+                return;
+            });
         });
     });
 });
