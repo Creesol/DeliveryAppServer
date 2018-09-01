@@ -178,7 +178,7 @@ app.get('/getFrozenVeg', function(req,res){
 app.get('/getAllFrozenVeg', function (req, res) {
     var query = "select * from category_detail where sub_category_name = 'FrozenVeg' LIMIT 9  OFFSET 9";
     handle_database(query, req, res);
-
+});
     app.get('/getChicken', function (req, res) {
         var query = "select * from category_detail where sub_category_name = 'Chicken' LIMIT 9";
         handle_database(query, req, res);
@@ -406,7 +406,7 @@ app.get('/getUserData', function (req, res) {
         });
     });
 
-});
+
 
 app.get('/getOrderData', function (req, res) {
     var query1 = "select order_id from mydb.order  where (_user_id=" + mysql.escape(req.query.user_id) + "And  orderStatus=" + mysql.escape(req.query.orderStatus)+")";
