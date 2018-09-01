@@ -373,7 +373,7 @@ app.get('/getUserData', function (req, res) {
                 connection.query(update, function (err, result) {
                     if (!err) {
                         sendNotification(req.query.token);
-                        res.json(data);
+                       // res.json(data);
                     }
                     else {
                         res.json({ "code": 100, "status": "Error in connection database" });
