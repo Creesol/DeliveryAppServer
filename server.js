@@ -304,12 +304,12 @@ app.post('/postOrderData', function (req, res) {
                 }
 
 
-            })
+            });
         }
                     
 
             }
-        })
+        });
 
         connection.on('error', function (err) {
             res.json({ "code": 100, "status": "Error in connection database2" });
@@ -357,7 +357,7 @@ app.get('/getUserData', function (req, res) {
                         res.json({ "code": 100, "status": "Error in connection database" });
 
                     }
-                })
+                });
                // res.json();
             }
             else {
@@ -422,7 +422,7 @@ app.get('/getOrderData', function (req, res) {
     //var phone = req.body[0].user_id;
     var query = "select order_id,total_price,DATE_FORMAT(orderdate, '%Y-%m-%d') AS dated,DATE_FORMAT(orderdate,'%H:%i:%s') AS timed,COUNT(product_name) As total_items FROM mydb.order INNER JOIN order_detail on mydb.order.order_id=mydb.order_detail._order_id where order_id=33";
 
-
+});
 });
 
 app.get('/CheckNumber', function (req, res) {
@@ -467,11 +467,6 @@ app.get('/CheckNumber', function (req, res) {
             return;
         });
     });
-    
-    
-
-
-
 });
     console.log('6');
 /*
