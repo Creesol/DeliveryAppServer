@@ -137,6 +137,16 @@ app.get('/getAllMutton', function(req,res){
     handle_database(query, req, res);
 });
 
+app.get('/getFrozenMeat', function(req,res){
+    var query = "select * from category_detail where sub_category_name = 'FrozenMeat' LIMIT 9";
+    handle_database(query, req, res);
+});
+
+app.get('/getAllFrozenMeat', function(req,res){
+    var query = "select * from category_detail where sub_category_name = 'FrozenMeat' LIMIT 9  OFFSET 9";
+    handle_database(query, req, res);
+});
+
 app.get('/getFruit', function(req,res){
     var query = "select * from category_detail where sub_category_name = 'Fruit' LIMIT 9";
     handle_database(query, req, res);
@@ -156,6 +166,15 @@ app.get('/getAllVegetable', function(req,res){
     var query = "select * from category_detail where sub_category_name = 'Vegetable' LIMIT 9  OFFSET 9";
     handle_database(query, req, res);
 });
+
+app.get('/getFrozenVeg', function(req,res){
+    var query = "select * from category_detail where sub_category_name = 'FrozenVeg' LIMIT 9";
+    handle_database(query, req, res);
+});
+
+app.get('/getAllFrozenVeg', function(req,res){
+    var query = "select * from category_detail where sub_category_name = 'FrozenVeg' LIMIT 9  OFFSET 9";
+    handle_database(query, req, res);
 
 app.get('/getChicken', function(req,res){
     var query = "select * from category_detail where sub_category_name = 'Chicken' LIMIT 9";
@@ -191,6 +210,12 @@ app.get('/getVegSlider', function(req,res){
     var query = "select * from Sliders where slider_category = 'Veg'";
     handle_database(query, req, res);
 });
+
+app.get('/getLaundrySlider', function(req,res){
+    var query = "select * from Sliders where slider_category = 'Laundry'";
+    handle_database(query, req, res);
+});
+
 app.post('/postUserData', function (req, res) {
     var query1 = "Insert into user_info(name,phone_no,token,email) values(" + req.body.name + "," + req.body.phone + "," + req.body.token + "," + req.body.email + ")";
     con.getConnection(function (err, connection) {
@@ -464,10 +489,7 @@ app.get('/', function (req, res) {
 
 <<<<<<< HEAD
 =======
-app.get('/getLaundrySlider', function(req,res){
-    var query = "select * from Sliders where slider_category = 'Laundry'";
-    handle_database(query, req, res);
-});
+
 */
 
 server.listen(PORT);
