@@ -373,7 +373,7 @@ app.get('/getUserData', function (req, res) {
                 connection.query(update, function (err, result) {
                     if (!err) {
                         sendNotification(req.query.token);
-                        //res.json(data);
+                        res.json(data);
                     }
                     else {
                         res.json({ "code": 100, "status": "Error in connection database" });
@@ -531,7 +531,7 @@ app.listen(PORT, function (err) {
 function sendNotification(token) {
 
 
-    app.get('/noti', function (req, res) {
+   
         var message = {
             "to": token,
             "notification": {
@@ -557,18 +557,19 @@ function sendNotification(token) {
                 console.log("Successfully sent with response: ", response);
             }
         });
-    });
+    
 }
-console.log('7');
+
     //promise style
-   /* fcm.send(message)
+    /*fcm.send(message)
         .then(function (response) {
             console.log("Successfully sent with response: ", response);
         })
         .catch(function (err) {
             console.log("Something has gone wrong!");
             console.error(err);
-        })
+    })
+/*
 
 
 //Admin Part Start
