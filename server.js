@@ -138,12 +138,12 @@ app.get('/getAllMutton', function(req,res){
 });
 
 app.get('/getFrozenMeat', function(req,res){
-    var query = "select * from category_detail where sub_category_name = 'Frozen-Meat' LIMIT 9";
+    var query = "select * from category_detail where sub_category_name = 'FrozenMeat' LIMIT 9";
     handle_database(query, req, res);
 });
 
 app.get('/getAllFrozenMeat', function(req,res){
-    var query = "select * from category_detail where sub_category_name = 'Frozen-Meat' LIMIT 9  OFFSET 9";
+    var query = "select * from category_detail where sub_category_name = 'FrozenMeat' LIMIT 9  OFFSET 9";
     handle_database(query, req, res);
 });
 
@@ -168,12 +168,12 @@ app.get('/getAllVegetable', function(req,res){
 });
 
 app.get('/getFrozenVeg', function(req,res){
-    var query = "select * from category_detail where sub_category_name = 'Frozen-Veg' LIMIT 9";
+    var query = "select * from category_detail where sub_category_name = 'FrozenVeg' LIMIT 9";
     handle_database(query, req, res);
 });
 
 app.get('/getAllFrozenVeg', function(req,res){
-    var query = "select * from category_detail where sub_category_name = 'Frozen-Veg' LIMIT 9  OFFSET 9";
+    var query = "select * from category_detail where sub_category_name = 'FrozenVeg' LIMIT 9  OFFSET 9";
     handle_database(query, req, res);
 
 app.get('/getChicken', function(req,res){
