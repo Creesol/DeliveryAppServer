@@ -52,7 +52,7 @@ var con = mysql.createPool({
     connectTimeout: 30000,
     acquireTimeout: 30000
 });
-
+console.log('1');
 //server.listen(PORT,'172.31.24.36');
 //console.log('Server is running');
 
@@ -71,6 +71,7 @@ exports.handler = (event, context, callback) => {
             con.end();
         });
 };
+console.log('2');
 /*
 app.get('/category', function (req, res) {
     
@@ -93,7 +94,7 @@ app.get('/category', function (req, res) {
 });
 */
 
-
+console.log('3');
 function handle_database(query,req,res) {
     
     con.getConnection(function(err,connection){
@@ -223,6 +224,7 @@ app.get('/getAllFrozenVeg', function (req, res) {
         handle_database(query, req, res);
     });
 
+
     app.get('/getLaundrySlider', function (req, res) {
         var query = "select * from Sliders where slider_category = 'Laundry'";
         handle_database(query, req, res);
@@ -237,98 +239,127 @@ app.get('/getAllFrozenVeg', function (req, res) {
                 return;
             }
 
-            console.log('connected as id ' + connection.threadId);
-
-            connection.query(query1, function (err, results) {
-                res.send({ "user_id": results.insertId });
-
-                if (!err) {
-                }
+            app.get('/getLaundrySlider', function (req, res) {
+                var query = "select * from Sliders where slider_category = 'Laundry'";
+                handle_database(query, req, res);
+                console.log('4');
             });
-        });
 
-    });
-    app.post('/postOrderData', function (req, res) {
-        console.log(req.body);
-        var name = req.body.name;
-
-        var user_id = req.body.user_id;
-        var orderStatus = 1;
-
-
-        var Longitude = req.body.Longitude;
-        var Latitude = req.body.Latitude;
-        var total_price = req.body.total_price;
-        var current_time = req.body.current_time;
-        var address = req.body.Address;
-        //var name = req.body.name;
-        //var user_id = req.body.user_id;
-        var item_detail = req.body.item_details;
-
-
-
-        var query = "Insert into mydb.order(_user_id,longitude,latitude,total_price,orderdate,address,orderStatus) values (" + mysql.escape(user_id) + "," + Longitude + "," + Latitude + "," + mysql.escape(total_price) + "," + mysql.escape(current_time) + "," + mysql.escape(address) + "," + orderStatus + ")";
-        // var data = [phone_number, Longitude, Latitude, total_price, current_time, address, orderStatus];
-        //("phone_number", "Longitude", "Latitude", "total_price", "current_time", "address", "orderStatus")";*/
-        //var query2 = "Insert into mydb.order(phoneno,orderStatus) values (" +phone_number + "," + orderStatus + ")";
-        //+ mysql.escape(phone_number, name, orderStatus) + ")";
-        // var data2 = [phone_number, orderStatus];
-
-        con.getConnection(function (err, connection) {
-            if (err) {
-                // console.log(err);
-                res.json({ "code": 100, "status": "Error in connection database" });
-                return;
-            }
-
-            console.log('connected as id ' + connection.threadId);
-
-            connection.query(query, function (err, results) {
-
-                if (!err) {
-                    //res.json(rows);
-                    //var query="insert into "
-                    // var order_id = results.insertId;
-
-                    var id = {
-                        order_id: results.insertId
-                    }
-                    // res.send(id);
-                    for (var i = 0; i < item_detail.length; i++) {
-                        var obj = item_detail[i];
-
-
-                        var query3 = "Insert into mydb.order_detail(product_name,price,_order_id,quantity) values(" + mysql.escape(obj.item_name) + "," + mysql.escape(obj.item_price) + "," + results.insertId + "," + obj.item_quantity + ")";
-                        connection.query(query3, function (err, results) {
-
-                            if (!err) {
-
-
-
-                                var detail_id = {
-                                    detail_order: results.insertId
-                                }
-                                console.log(detail_id);
-                            }
-                            else {
-                                console.log(err);
-                            }
-
-
-                        })
+            app.post('/postUserData', function (req, res) {
+                var query1 = "Insert into user_info(name,phone_no,token,email) values(" + req.body.name + "," + req.body.phone + "," + req.body.token + "," + req.body.email + ")";
+                con.getConnection(function (err, connection) {
+                    if (err) {
+                        // console.log(err);
+                        res.json({ "code": 100, "status": "Error in connection database" });
+                        return;
                     }
 
 
-                }
+                    console.log('connected as id ' + connection.threadId);
+
+                    connection.query(query1, function (err, results) {
+                        res.send({ "user_id": results.insertId });
+
+                        if (!err) {
+                        }
+                    });
+                });
+
+            });
+            app.post('/postOrderData', function (req, res) {
+                console.log(req.body);
+                var name = req.body.name;
+
+                var user_id = req.body.user_id;
+                var orderStatus = 1;
+
+
+                var Longitude = req.body.Longitude;
+                var Latitude = req.body.Latitude;
+                var total_price = req.body.total_price;
+                var current_time = req.body.current_time;
+                var address = req.body.Address;
+                //var name = req.body.name;
+                //var user_id = req.body.user_id;
+                var item_detail = req.body.item_details;
+
+
+
+                var query = "Insert into mydb.order(_user_id,longitude,latitude,total_price,orderdate,address,orderStatus) values (" + mysql.escape(user_id) + "," + Longitude + "," + Latitude + "," + mysql.escape(total_price) + "," + mysql.escape(current_time) + "," + mysql.escape(address) + "," + orderStatus + ")";
+                // var data = [phone_number, Longitude, Latitude, total_price, current_time, address, orderStatus];
+                //("phone_number", "Longitude", "Latitude", "total_price", "current_time", "address", "orderStatus")";*/
+                //var query2 = "Insert into mydb.order(phoneno,orderStatus) values (" +phone_number + "," + orderStatus + ")";
+                //+ mysql.escape(phone_number, name, orderStatus) + ")";
+                // var data2 = [phone_number, orderStatus];
+
+                con.getConnection(function (err, connection) {
+                    if (err) {
+                        // console.log(err);
+                        res.json({ "code": 100, "status": "Error in connection database" });
+                        return;
+                    }
+
+                    console.log('connected as id ' + connection.threadId);
+
+                    connection.query(query, function (err, results) {
+
+                        if (!err) {
+                            //res.json(rows);
+                            //var query="insert into "
+                            // var order_id = results.insertId;
+
+                            var id = {
+                                order_id: results.insertId
+                            }
+                            // res.send(id);
+                            for (var i = 0; i < item_detail.length; i++) {
+                                var obj = item_detail[i];
+
+
+                                var query3 = "Insert into mydb.order_detail(product_name,price,_order_id,quantity) values(" + mysql.escape(obj.item_name) + "," + mysql.escape(obj.item_price) + "," + results.insertId + "," + obj.item_quantity + ")";
+                                connection.query(query3, function (err, results) {
+
+                                    if (!err) {
+
+
+
+                                        var detail_id = {
+                                            detail_order: results.insertId
+                                        }
+                                        console.log(detail_id);
+                                    }
+                                    else {
+                                        console.log(err);
+                                    }
+
+
+                                })
+                            }
+
+
+
+                        }
+                    })
+
+                    connection.on('error', function (err) {
+                        res.json({ "code": 100, "status": "Error in connection database2" });
+                        return;
+                    });
+
+                });
             })
+                    
+        })
+            
+        });
 
-            connection.on('error', function (err) {
-                res.json({ "code": 100, "status": "Error in connection database2" });
-                return;
-            });
+        connection.on('error', function (err) {
+            res.json({ "code": 100, "status": "Error in connection database2" });
+            return;
+
         });
     });
-});
+
 
     /*name
     phone_number
@@ -341,6 +372,7 @@ app.get('/getAllFrozenVeg', function (req, res) {
 
 });
 */
+    console.log('5');
 app.get('/getUserData', function (req, res) {
     //var sql = "select user_id from user_info where phoneno=" + mysql.escape(req.query.phone);
     
@@ -368,7 +400,7 @@ app.get('/getUserData', function (req, res) {
                         res.json({ "code": 100, "status": "Error in connection database" });
 
                     }
-                })
+                });
                // res.json();
             }
             else {
@@ -439,8 +471,8 @@ app.get('/getOrderData', function (req, res) {
     //var phone = req.body[0].user_id;
     var query = "select order_id,total_price,DATE_FORMAT(orderdate, '%Y-%m-%d') AS dated,DATE_FORMAT(orderdate,'%H:%i:%s') AS timed,COUNT(product_name) As total_items FROM mydb.order INNER JOIN order_detail on mydb.order.order_id=mydb.order_detail._order_id where order_id=33";
 
-
 });
+
 
 app.get('/CheckNumber', function (req, res) {
     var check = "select * from user_info where phone_no=" + mysql.escape(req.query.phone);
@@ -484,12 +516,8 @@ app.get('/CheckNumber', function (req, res) {
             return;
         });
     });
-    
-    
-
-
-
 });
+    console.log('6');
 /*
 app.post('/postOrderData2', function (req, res) {
     res.send("yes");
@@ -552,7 +580,7 @@ function sendNotification(token) {
         });
     });
 }
-
+console.log('7');
     //promise style
    /* fcm.send(message)
         .then(function (response) {
@@ -683,7 +711,7 @@ app.get('/Items', function (req, res) {
         
     })
 })
-
+console.log('8');
 //send menu items to user step 3
 app.get('/Item', function (req, res) {
     console.log("runnning");
