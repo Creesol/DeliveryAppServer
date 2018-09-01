@@ -13,7 +13,7 @@ var server = http.createServer(app);
 var FCM = require('fcm-push');
 var request = require('request');
 
-var serverKey = 'AAAASgtMh-o:APA91bHlJlpKoH6Kk_hU4lWcMBOSYGwpg9fAQc1sT9KEZuTv6HeF6oaYGurT8yLzNqxAa30AP4NnLRWccYYshyU4OBFhpBx5USGMlKg0VYzzHXKnAwWAtMCddpMEWu0vAlVwgiaphzuOC3tBSXUAoGZduA6IMqIsug';
+var serverKey = 'AAAAJs5eZrA:APA91bHlnPxJoWaldLIrmHdJVJiu62qNPXm1yXuaCAprPDGp4jvO0szcoGMQleQS2ltN2QCxYuwWc8RcHmnE31nB9CU-VaRFE6AsbXYyqSpSi168A4o4Ibm04YComO5PMACfDE1Zsmy3_j3upcar-0Bq9R63HGE5wg';
 var fcm = new FCM(serverKey);
 
 app.use(bodyParser.urlencoded({ extended: false }));
