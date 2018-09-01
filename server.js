@@ -251,7 +251,8 @@ app.get('/getAllFrozenVeg', function (req, res) {
             });
             //});
             app.post('/postOrderData', function (req, res) {
-                res.send("connected");
+                var query0 = "select token from user_info where user_id=" + mysql.escape(req.body.user_id);
+
                 console.log(req.body);
                 var name = req.body.name;
 
@@ -285,6 +286,7 @@ app.get('/getAllFrozenVeg', function (req, res) {
                     }
 
                     console.log('connected as id ' + connection.threadId);
+                    
 
                     connection.query(query, function (err, results) {
 
@@ -296,6 +298,13 @@ app.get('/getAllFrozenVeg', function (req, res) {
                             var id = {
                                 order_id: results.insertId
                             }
+                            connection.query(query0, function (req, results) {
+                                if (!err) {
+                                    console.log(results);
+                                }
+
+                            })
+
                             // res.send(id);
                             for (var i = 0; i < item_detail.length; i++) {
                                 var obj = item_detail[i];
@@ -306,7 +315,7 @@ app.get('/getAllFrozenVeg', function (req, res) {
 
                                     if (!err) {
 
-
+                                        var query4="select from mydb.order"
 
                                         var detail_id = {
                                             detail_order: results.insertId
@@ -372,8 +381,8 @@ app.get('/getUserData', function (req, res) {
                 var update = "UPDATE user_info set token="+mysql.escape(req.query.token)+" where user_id="+mysql.escape(user_id);
                 connection.query(update, function (err, result) {
                     if (!err) {
-                        sendNotification(req.query.token);
-                       // res.json(data);
+                        //sendNotification(req.query.token);
+                        res.json(data);
                     }
                     else {
                         res.json({ "code": 100, "status": "Error in connection database" });
