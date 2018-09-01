@@ -40,7 +40,7 @@ var con = mysql.createPool({
     connectTimeout: 30000,
     acquireTimeout: 30000
 });
-
+console.log('1');
 //server.listen(PORT,'172.31.24.36');
 //console.log('Server is running');
 
@@ -59,6 +59,7 @@ exports.handler = (event, context, callback) => {
             con.end();
         });
 };
+console.log('2');
 /*
 app.get('/category', function (req, res) {
     
@@ -81,7 +82,7 @@ app.get('/category', function (req, res) {
 });
 */
 
-
+console.log('3');
 function handle_database(query,req,res) {
     
     con.getConnection(function(err,connection){
@@ -215,7 +216,7 @@ app.get('/getLaundrySlider', function(req,res){
     var query = "select * from Sliders where slider_category = 'Laundry'";
     handle_database(query, req, res);
 });
-
+console.log('4');
 app.post('/postUserData', function (req, res) {
     var query1 = "Insert into user_info(name,phone_no,token,email) values(" + req.body.name + "," + req.body.phone + "," + req.body.token + "," + req.body.email + ")";
     con.getConnection(function (err, connection) {
@@ -328,6 +329,7 @@ app.post('/postOrderData', function (req, res) {
 
 });
 */
+    console.log('5');
 app.get('/getUserData', function (req, res) {
     //var sql = "select user_id from user_info where phoneno=" + mysql.escape(req.query.phone);
     
@@ -471,6 +473,7 @@ app.get('/CheckNumber', function (req, res) {
 
 
 });
+    console.log('6');
 /*
 app.post('/postOrderData2', function (req, res) {
     res.send("yes");
@@ -533,7 +536,7 @@ function sendNotification(token) {
         });
     });
 }
-
+console.log('7');
     //promise style
    /* fcm.send(message)
         .then(function (response) {
@@ -664,7 +667,7 @@ app.get('/Items', function (req, res) {
         
     })
 })
-
+console.log('8');
 //send menu items to user step 3
 app.get('/Item', function (req, res) {
     console.log("runnning");
