@@ -19,17 +19,7 @@ var fcm = new FCM(serverKey);
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 var fs = require('fs');
-var check = require('syntax-error');
 
-var file = __dirname + '/server.js';
-var src = fs.readFileSync(file);
-
-var err = check(src, file);
-if (err) {
-    console.error('ERROR DETECTED' + Array(62).join('!'));
-    console.error(err);
-    console.error(Array(76).join('-'));
-}
 /*
 app.listen(PORT, function (err) {
     if (err) {
