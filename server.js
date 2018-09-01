@@ -118,62 +118,62 @@ app.get('/getDairy', function(req,res){
 });
 
 app.get('/getBeef', function(req,res){
-    var query = "select * from category_detail where sub_category_name = 'Beef' LIMIT 6";
+    var query = "select * from category_detail where sub_category_name = 'Beef' LIMIT 9";
     handle_database(query, req, res);
 });
 
 app.get('/getAllBeef', function(req,res){
-    var query = "select * from category_detail where sub_category_name = 'Beef'";
+    var query = "select * from category_detail where sub_category_name = 'Beef' LIMIT 9  OFFSET 9";
     handle_database(query, req, res);
 });
 
 app.get('/getMutton', function(req,res){
-    var query = "select * from category_detail where sub_category_name = 'Mutton' LIMIT 6";
+    var query = "select * from category_detail where sub_category_name = 'Mutton' LIMIT 9";
     handle_database(query, req, res);
 });
 
 app.get('/getAllMutton', function(req,res){
-    var query = "select * from category_detail where sub_category_name = 'Mutton'";
+    var query = "select * from category_detail where sub_category_name = 'Mutton' LIMIT 9  OFFSET 9";
     handle_database(query, req, res);
 });
 
 app.get('/getFruit', function(req,res){
-    var query = "select * from category_detail where sub_category_name = 'Fruit' LIMIT 6";
+    var query = "select * from category_detail where sub_category_name = 'Fruit' LIMIT 9";
     handle_database(query, req, res);
 });
 
 app.get('/getAllFruit', function(req,res){
-    var query = "select * from category_detail where sub_category_name = 'Fruit'";
+    var query = "select * from category_detail where sub_category_name = 'Fruit' LIMIT 9  OFFSET 9";
     handle_database(query, req, res);
 });
 
 app.get('/getVegetable', function(req,res){
-    var query = "select * from category_detail where sub_category_name = 'Vegetable' LIMIT 6";
+    var query = "select * from category_detail where sub_category_name = 'Vegetable' LIMIT 9";
     handle_database(query, req, res);
 });
 
 app.get('/getAllVegetable', function(req,res){
-    var query = "select * from category_detail where sub_category_name = 'Vegetable'";
+    var query = "select * from category_detail where sub_category_name = 'Vegetable' LIMIT 9  OFFSET 9";
     handle_database(query, req, res);
 });
 
 app.get('/getChicken', function(req,res){
-    var query = "select * from category_detail where sub_category_name = 'Chicken' LIMIT 6";
+    var query = "select * from category_detail where sub_category_name = 'Chicken' LIMIT 9";
     handle_database(query, req, res);
 });
 
 app.get('/getAllChicken', function(req,res){
-    var query = "select * from category_detail where sub_category_name = 'Chicken'";
+    var query = "select * from category_detail where sub_category_name = 'Chicken' LIMIT 9  OFFSET 9";
     handle_database(query, req, res);
 });
 
 app.get('/getDryClean', function(req,res){
-    var query = "select * from category_detail where sub_category_name = 'Dry Clean' LIMIT 6";
+    var query = "select * from category_detail where sub_category_name = 'Dry Clean' LIMIT 9";
     handle_database(query, req, res);
 });
 
 app.get('/getAllDryClean', function(req,res){
-    var query = "select * from category_detail where sub_category_name = 'Dry Clean'";
+    var query = "select * from category_detail where sub_category_name = 'Dry Clean' LIMIT 9  OFFSET 9";
     handle_database(query, req, res);
 });
 
@@ -230,7 +230,7 @@ app.post('/postOrderData', function (req, res) {
 
     
 
-    var query = "Insert into mydb.order(_user_id,longitude,latitude,total_price,orderdate,address,orderStatus) values (" + user_id + "," + Longitude + "," + Latitude + "," + mysql.escape(total_price) + "," + mysql.escape( current_time) + "," +mysql.escape(address) + "," + orderStatus + ")";
+    var query = "Insert into mydb.order(_user_id,longitude,latitude,total_price,orderdate,address,orderStatus) values (" + mysql.escape(user_id) + "," + Longitude + "," + Latitude + "," + mysql.escape(total_price) + "," + mysql.escape( current_time) + "," +mysql.escape(address) + "," + orderStatus + ")";
    // var data = [phone_number, Longitude, Latitude, total_price, current_time, address, orderStatus];
     //("phone_number", "Longitude", "Latitude", "total_price", "current_time", "address", "orderStatus")";*/
     //var query2 = "Insert into mydb.order(phoneno,orderStatus) values (" +phone_number + "," + orderStatus + ")";
@@ -348,7 +348,7 @@ app.get('/getUserData', function (req, res) {
 });
 
 app.get('/getOrderData', function (req, res) {
-    var query1 = "select order_id from mydb.order  where _user_id=" + mysql.escape(req.query.user_id);
+    var query1 = "select order_id from mydb.order  where (_user_id=" + mysql.escape(req.query.user_id) + "And  orderStatus=" + mysql.escape(req.query.orderStatus)+")";
     con.getConnection(function (err, connection) {
         if (err) {
             res.json({ "code": 100, "status": "Error in connection database" });
