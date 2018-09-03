@@ -245,7 +245,8 @@ app.get('/getAllFrozenVeg', function (req, res) {
                         //res.json({ "user_id": results.user_id });
 
                         if (!err) {
-                        }
+                        }else
+                            console.log(err)
                     });
                 });
 
