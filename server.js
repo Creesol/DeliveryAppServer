@@ -241,8 +241,8 @@ app.get('/getAllFrozenVeg', function (req, res) {
                     console.log('connected as id ' + connection.threadId);
 
                     connection.query(query1, function (err, results) {
-                        console.log(results.user_id);
-                        res.json({ "user_id": results.user_id });
+                        //console.log(results.user_id);
+                        //res.json({ "user_id": results.user_id });
 
                         if (!err) {
                         }
