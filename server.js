@@ -229,7 +229,7 @@ app.get('/getAllFrozenVeg', function (req, res) {
           
 
             app.post('/postUserData', function (req, res) {
-                var query1 = "Insert into mydb.user_info(name,phone_no,token,email) values(" + req.body.name + "," + req.body.phone + "," + req.body.token + "," + req.body.email + ")";
+                var query1 = "Insert into mydb.user_info(name,phone_no,token,email) values(" + mysql.escape(req.body.name) + "," + mysql.escape(req.body.phone) + "," + mysql.escape(req.body.token) + "," + mysql.escape(req.body.email) + ")";
                 con.getConnection(function (err, connection) {
                     if (err) {
                         // console.log(err);
