@@ -375,12 +375,14 @@ app.get('/getUserData', function (req, res) {
 
         console.log('connected as id ' + connection.threadId);
 
-       
-            //connection.release();
+        connection.query(sql1, function (err, result) {	       
+            //connection.release();	            //connection.release();
+            if (!err) {
             
-                //var data = result[0];
-                //var user_id = data.user_id;
-                var update = "UPDATE user_info set token="+mysql.escape(req.query.token)+" where phone_no="+mysql.escape(req.query.phone);
+            
+                var data = result[0];
+                var user_id = data.user_id;
+                var update = "UPDATE user_info set token="+mysql.escape(req.query.token)+" where phone_no="+mysql.escape(user_id);
                 connection.query(update, function (err, result) {
                     if (!err) {
                         //sendNotification(req.query.token);
@@ -392,7 +394,13 @@ app.get('/getUserData', function (req, res) {
                     }
                 });
                // res.json();
-            
+             }	            
+            else {	        
+                res.json({ "code": 100, "status": "Error in connection database" });	
+                	
+             }	
+        });	
+
         
 
         connection.on('error', function (err) {
