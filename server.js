@@ -744,6 +744,102 @@ app.get('/OrderStatus', function (req, res) {
 })
 //user side end
 
+//Delivery side
+app.get('/OrderLocation', function (req, res) {
+    var query="SELECT order_id,latitude,longitude FROM mydb.`order` where orderStatus=1";
+     con.getConnection(function (err, connection) {
+        if (err) {
+             console.log(err);
+            res.json({ "code": 100, "status": "Error in connection database" });
+            return;
+        }
+
+        console.log('connected as id ' + connection.threadId);
+
+        connection.query(check, function (err, result) {
+            res.send(result);
+        })
+     })
+   
+});
+
+app.get('/OrderDetailData', function (req, res) {
+    var query="SELECT product_name,price,_order_id,quantity   from order_detail where _order_id="+mysql.escape(req.query.order_id);
+     con.getConnection(function (err, connection) {
+        if (err) {
+             console.log(err);
+            res.json({ "code": 100, "status": "Error in connection database" });
+            return;
+        }
+
+        console.log('connected as id ' + connection.threadId);
+
+        connection.query(check, function (err, result) {
+            res.json(result);
+        })
+     })
+   
+});
+
+
+
+app.get('/OrderPaymentData', function (req, res) {
+    var query="SELECT total_price FROM mydb.`order` where order_id="+mysql.escape(req.query.order_id);
+     con.getConnection(function (err, connection) {
+        if (err) {
+             console.log(err);
+            res.json({ "code": 100, "status": "Error in connection database" });
+            return;
+        }
+
+        console.log('connected as id ' + connection.threadId);
+
+        connection.query(check, function (err, result) {
+            res.json(result);
+        })
+     })
+   
+});
+
+
+app.get('/StartDelivery', function (req, res) {
+    var query="UPDATE `mydb`.`order` SET orderStatus=2 WHERE `order_id`="+mysql.escape(req.query.order_id);
+     con.getConnection(function (err, connection) {
+        if (err) {
+             console.log(err);
+            res.json({ "code": 100, "status": "Error in connection database" });
+            return;
+        }
+
+        console.log('connected as id ' + connection.threadId);
+
+        connection.query(check, function (err, result) {
+            res.json(result);
+        })
+     })
+   
+});
+
+app.get('/confirmPayment', function (req, res) {
+    var query="UPDATE `mydb`.`order` SET orderStatus=3 WHERE `order_id`="+mysql.escape(req.query.order_id);
+     con.getConnection(function (err, connection) {
+        if (err) {
+             console.log(err);
+            res.json({ "code": 100, "status": "Error in connection database" });
+            return;
+        }
+
+        console.log('connected as id ' + connection.threadId);
+
+        connection.query(check, function (err, result) {
+            res.json(result);
+        })
+     })
+   
+});
+
+
+
 /*
 
 app.post('/notified', function (req, res) {
@@ -892,7 +988,7 @@ app.get('/insertItems', function (req, res) {
         if (err) {
             res.send(0);
         }
-
+        
     });
 
 
