@@ -240,13 +240,13 @@ app.get('/getAllFrozenVeg', function (req, res) {
 
                     console.log('connected as id ' + connection.threadId);
 
-                    connection.query(query1, function (err, results) {
+                    connection.query(query1, function (err, result) {
                         console.log(results);
                        // res.json({ "user_id": results.user_id });
-                        /*var query2="select * from mydb.user_info where user_id="+mysql.escape(results.insertedid);
+                        var query2="select * from mydb.user_info where user_id="+mysql.escape(results.insertedId);
                         connection.query(query2,function(err,result){
                             res.send(result[0]);
-                        });*/
+                        });
                                          
 
                         if (!err) {
