@@ -243,7 +243,7 @@ app.get('/getAllFrozenVeg', function (req, res) {
                     connection.query(query1, function (err, result) {
                         console.log(results);
                        // res.json({ "user_id": results.user_id });
-                        var query2="select * from mydb.user_info where user_id="+mysql.escape(results.insertedId);
+                        var query2="select * from mydb.user_info where user_id="+mysql.escape(result.insertedId);
                         connection.query(query2,function(err,result){
                             res.send(result[0]);
                         });
