@@ -757,6 +757,7 @@ app.get('/OrderLocation', function (req, res) {
         console.log('connected as id ' + connection.threadId);
 
         connection.query(query, function (err, result) {
+             connection.release();
             res.send(result);
         })
      })
@@ -776,6 +777,7 @@ app.get('/OrderDetailData', function (req, res) {
 
         connection.query(query, function (err, result) {
             console.log(result);
+            connection.release();
             res.send(result);
             
         })
@@ -798,6 +800,7 @@ app.get('/OrderPaymentData', function (req, res) {
 
         connection.query(query, function (err, result) {
             //console.log(result);
+             connection.release();
             res.send(result[0].total_price);
         })
      })
@@ -817,6 +820,7 @@ app.get('/StartDelivery', function (req, res) {
         console.log('connected as id ' + connection.threadId);
 
         connection.query(query, function (err, result) {
+             connection.release();
             res.json(result);
         })
      })
@@ -835,6 +839,7 @@ app.get('/confirmPayment', function (req, res) {
         console.log('connected as id ' + connection.threadId);
 
         connection.query(query, function (err, result) {
+             connection.release();
             res.json(result);
         })
      })
