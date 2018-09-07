@@ -816,7 +816,7 @@ app.get('/StartDelivery', function (req, res) {
 
         console.log('connected as id ' + connection.threadId);
 
-        connection.query(check, function (err, result) {
+        connection.query(query, function (err, result) {
             res.json(result);
         })
      })
@@ -834,7 +834,7 @@ app.get('/confirmPayment', function (req, res) {
 
         console.log('connected as id ' + connection.threadId);
 
-        connection.query(check, function (err, result) {
+        connection.query(query, function (err, result) {
             res.json(result);
         })
      })
