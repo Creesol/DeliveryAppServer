@@ -798,7 +798,7 @@ app.get('/OrderPaymentData', function (req, res) {
 
         connection.query(query, function (err, result) {
             //console.log(result);
-            res.send(result);
+            res.send(result[0].total_price);
         })
      })
    
