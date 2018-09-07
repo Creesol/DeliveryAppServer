@@ -797,8 +797,8 @@ app.get('/OrderPaymentData', function (req, res) {
         console.log('connected as id ' + connection.threadId);
 
         connection.query(query, function (err, result) {
-            console.log(result);
-            //res.send(result);
+            //console.log(result);
+            res.send(result);
         })
      })
    
