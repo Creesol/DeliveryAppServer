@@ -775,7 +775,9 @@ app.get('/OrderDetailData', function (req, res) {
         console.log('connected as id ' + connection.threadId);
 
         connection.query(query, function (err, result) {
-            res.json(result);
+            console.log(result[0]);
+            res.send(result);
+            
         })
      })
    
