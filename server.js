@@ -756,7 +756,7 @@ app.get('/OrderLocation', function (req, res) {
 
         console.log('connected as id ' + connection.threadId);
 
-        connection.query(check, function (err, result) {
+        connection.query(query, function (err, result) {
             res.send(result);
         })
      })
@@ -796,8 +796,9 @@ app.get('/OrderPaymentData', function (req, res) {
 
         console.log('connected as id ' + connection.threadId);
 
-        connection.query(check, function (err, result) {
-            res.json(result);
+        connection.query(query, function (err, result) {
+            console.log(result);
+            //res.send(result);
         })
      })
    
