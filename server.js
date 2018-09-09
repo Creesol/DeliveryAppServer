@@ -121,82 +121,82 @@ app.get('/getDairy', function(req,res){
 });
 
 app.get('/getBeef', function(req,res){
-    var query = "select * from category_detail where sub_category_name = 'Beef' LIMIT 9";
+    var query = "select * from category_detail where sub_category_name = 'Beef' LIMIT 7";
     handle_database(query, req, res);
 });
 
 app.get('/getAllBeef', function(req,res){
-    var query = "select * from category_detail where sub_category_name = 'Beef' LIMIT 9  OFFSET 9";
+    var query = "select * from category_detail where sub_category_name = 'Beef' LIMIT 9  OFFSET 7";
     handle_database(query, req, res);
 });
 
 app.get('/getMutton', function(req,res){
-    var query = "select * from category_detail where sub_category_name = 'Mutton' LIMIT 9";
+    var query = "select * from category_detail where sub_category_name = 'Mutton' LIMIT 7";
     handle_database(query, req, res);
 });
 
 app.get('/getAllMutton', function(req,res){
-    var query = "select * from category_detail where sub_category_name = 'Mutton' LIMIT 9  OFFSET 9";
+    var query = "select * from category_detail where sub_category_name = 'Mutton' LIMIT 9  OFFSET 7";
     handle_database(query, req, res);
 });
 
 app.get('/getFrozenMeat', function(req,res){
-    var query = "select * from category_detail where sub_category_name = 'FrozenMeat' LIMIT 9";
+    var query = "select * from category_detail where sub_category_name = 'FrozenMeat' LIMIT 7";
     handle_database(query, req, res);
 });
 
 app.get('/getAllFrozenMeat', function(req,res){
-    var query = "select * from category_detail where sub_category_name = 'FrozenMeat' LIMIT 9  OFFSET 9";
+    var query = "select * from category_detail where sub_category_name = 'FrozenMeat' LIMIT 9  OFFSET 7";
     handle_database(query, req, res);
 });
 
 app.get('/getFruit', function(req,res){
-    var query = "select * from category_detail where sub_category_name = 'Fruit' LIMIT 9";
+    var query = "select * from category_detail where sub_category_name = 'Fruit' LIMIT 7";
     handle_database(query, req, res);
 });
 
 app.get('/getAllFruit', function(req,res){
-    var query = "select * from category_detail where sub_category_name = 'Fruit' LIMIT 9  OFFSET 9";
+    var query = "select * from category_detail where sub_category_name = 'Fruit' LIMIT 9  OFFSET 7";
     handle_database(query, req, res);
 });
 
 app.get('/getVegetable', function(req,res){
-    var query = "select * from category_detail where sub_category_name = 'Vegetable' LIMIT 9";
+    var query = "select * from category_detail where sub_category_name = 'Vegetable' LIMIT 7";
     handle_database(query, req, res);
 });
 
 app.get('/getAllVegetable', function(req,res){
-    var query = "select * from category_detail where sub_category_name = 'Vegetable' LIMIT 9  OFFSET 9";
+    var query = "select * from category_detail where sub_category_name = 'Vegetable' LIMIT 9  OFFSET 7";
     handle_database(query, req, res);
 });
 
 app.get('/getFrozenVeg', function(req,res){
-    var query = "select * from category_detail where sub_category_name = 'FrozenVeg' LIMIT 9";
+    var query = "select * from category_detail where sub_category_name = 'FrozenVeg' LIMIT 7";
     handle_database(query, req, res);
 });
 
 app.get('/getAllFrozenVeg', function (req, res) {
-    var query = "select * from category_detail where sub_category_name = 'FrozenVeg' LIMIT 9  OFFSET 9";
+    var query = "select * from category_detail where sub_category_name = 'FrozenVeg' LIMIT 9  OFFSET 7";
     handle_database(query, req, res);
 });
 
     app.get('/getChicken', function (req, res) {
-        var query = "select * from category_detail where sub_category_name = 'Chicken' LIMIT 9";
+        var query = "select * from category_detail where sub_category_name = 'Chicken' LIMIT 7";
         handle_database(query, req, res);
     });
 
     app.get('/getAllChicken', function (req, res) {
-        var query = "select * from category_detail where sub_category_name = 'Chicken' LIMIT 9  OFFSET 9";
+        var query = "select * from category_detail where sub_category_name = 'Chicken' LIMIT 9  OFFSET 7";
         handle_database(query, req, res);
     });
 
     app.get('/getDryClean', function (req, res) {
-        var query = "select * from category_detail where sub_category_name = 'Dry Clean' LIMIT 9";
+        var query = "select * from category_detail where sub_category_name = 'Dry Clean' LIMIT 7";
         handle_database(query, req, res);
     });
 
     app.get('/getAllDryClean', function (req, res) {
-        var query = "select * from category_detail where sub_category_name = 'Dry Clean' LIMIT 9  OFFSET 9";
+        var query = "select * from category_detail where sub_category_name = 'Dry Clean' LIMIT 9  OFFSET 7";
         handle_database(query, req, res);
     });
 
