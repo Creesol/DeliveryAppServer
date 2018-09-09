@@ -121,12 +121,12 @@ app.get('/getDairy', function(req,res){
 });
 
 app.get('/getBeef', function(req,res){
-    var query = "select * from category_detail where sub_category_name = 'Beef' LIMIT 8";
+    var query = "select * from category_detail where sub_category_name = 'Beef' LIMIT 7";
     handle_database(query, req, res);
 });
 
 app.get('/getAllBeef', function(req,res){
-    var query = "select * from category_detail where sub_category_name = 'Beef' LIMIT 9  OFFSET 8";
+    var query = "select * from category_detail where sub_category_name = 'Beef' LIMIT 9  OFFSET 7";
     handle_database(query, req, res);
 });
 
