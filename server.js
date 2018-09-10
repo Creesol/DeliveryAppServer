@@ -558,12 +558,6 @@ function sendNotification(token) {
                 "title": "Node js Portugal vs. Denmark",
                 "content_available": true,
                 "priority": "high",
-            },
-            "data": {
-                "body": "Node js great match!",
-                "title": "Node js Portugal vs. Denmark",
-                "content_available": true,
-                "priority": "high",
             }
         }
 
