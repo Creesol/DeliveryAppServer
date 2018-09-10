@@ -321,6 +321,7 @@ app.get('/getAllFrozenVeg', function (req, res) {
                                 connection.query(query3, function (err, results) {
 
                                     if (!err) {
+                                        connection.release();
 
                                         var query4="select from mydb.order"
 
