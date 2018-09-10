@@ -321,7 +321,8 @@ app.get('/getAllFrozenVeg', function (req, res) {
                                 connection.query(query3, function (err, results) {
 
                                     if (!err) {
-                                        connection.release();
+                                       // connection.release();
+                                        res.send("success");
 
                                         var query4="select from mydb.order"
 
@@ -329,6 +330,7 @@ app.get('/getAllFrozenVeg', function (req, res) {
                                             detail_order: results.insertId
                                         }
                                         console.log(detail_id);
+                                        
                                     }
                                     else {
                                         console.log(err);
