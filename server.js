@@ -412,7 +412,7 @@ app.get('/getUserData', function (req, res) {
                 connection.query(sql1, function (err, result) {
                     if (!err) {
                         //sendNotification(req.query.token);
-                        res.json(result);
+                        res.json(result[0]);
                     }
                     else {
                         res.json({ "code": 100, "status": "Error in connection database" });
