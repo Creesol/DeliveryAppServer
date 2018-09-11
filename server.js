@@ -333,7 +333,7 @@ app.get('/getAllFrozenVeg', function (req, res) {
                                 var obj = item_detail[i];
 
 
-                                var query3 = "Insert into mydb.order_detail(product_name,price,_order_id,quantity) values(" + mysql.escape(obj.item_name) + "," + mysql.escape(obj.item_price) + "," + results.insertId + "," + obj.item_quantity + ")";
+                                var query3 = "Insert into mydb.order_detail(product_name,price,_order_id,quantity,Instructions) values(" + mysql.escape(obj.item_name) + "," + mysql.escape(obj.item_price) + "," + results.insertId + "," + obj.item_quantity + ","+mysql.escape(obj.instruct)+")";
                                 connection.query(query3, function (err, results) {
 
                                     if (!err) {
