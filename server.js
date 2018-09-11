@@ -391,7 +391,7 @@ app.get('/getUserData', function (req, res) {
             
                 var data = result[0];
                 var user_id = data.user_id;
-                var update = "UPDATE user_info set token="+mysql.escape(req.query.token)+" where phone_no="+mysql.escape(user_id);
+                var update = "UPDATE user_info set token="+mysql.escape(req.query.token)+" where user_id="+mysql.escape(user_id);
                 connection.query(update, function (err, result) {
                     if (!err) {
                         //sendNotification(req.query.token);
