@@ -575,8 +575,8 @@ function sendNotification(token) {
         var message = {
             "to": token,
             "notification": {
-                "body": "Node js great match!",
-                "title": "Node js Portugal vs. Denmark",
+                "body": "Thanks for ordering with us",
+                "title": "Knock ! ",
                 "content_available": true,
                 "priority": "high",
             }
