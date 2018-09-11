@@ -392,6 +392,7 @@ app.get('/getUserData', function (req, res) {
     //var sql = "select user_id from user_info where phoneno=" + mysql.escape(req.query.phone);
     
     var sql1 = "select * from user_info where phone_no=" + mysql.escape(req.query.phoneNo);
+    var update = "UPDATE user_info set token="+mysql.escape(req.query.token)+" where phoneno="+mysql.escape(req.query.phoneNo);
     con.getConnection(function (err, connection) {
         if (err) {
             res.json({ "code": 100, "status": "Error in connection database" });
@@ -400,15 +401,15 @@ app.get('/getUserData', function (req, res) {
 
         console.log('connected as id ' + connection.threadId);
 
-        connection.query(sql1, function (err, result) {	       
+        connection.query(update, function (err, result) {	       
             //connection.release();	            //connection.release();
             if (!err) {
             
             
-                var data = result[0];
-                var user_id = data.user_id;
-                var update = "UPDATE user_info set token="+mysql.escape(req.query.token)+" where user_id="+mysql.escape(user_id);
-                connection.query(update, function (err, result) {
+               // var data = result[0];
+                //var user_id = data.user_id;
+                
+                connection.query(sql1, function (err, result) {
                     if (!err) {
                         //sendNotification(req.query.token);
                         res.json(result);
