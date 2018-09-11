@@ -392,7 +392,7 @@ app.get('/getUserData', function (req, res) {
     //var sql = "select user_id from user_info where phoneno=" + mysql.escape(req.query.phone);
     
     var sql1 = "select * from user_info where phone_no=" + mysql.escape(req.query.phoneNo);
-    var update = "UPDATE user_info set token="+mysql.escape(req.query.token)+" where phoneno="+mysql.escape(req.query.phoneNo);
+    var update = "UPDATE user_info set token="+mysql.escape(req.query.token)+" where phone_no="+mysql.escape(req.query.phoneNo);
     con.getConnection(function (err, connection) {
         if (err) {
             res.json({ "code": 100, "status": "Error in connection database" });
