@@ -114,6 +114,22 @@ app.get('/handle', function(req,res){
     var query = "select * from category_detail";
     handle_database(query, req, res);
 });
+app.get('/getDeliveryDairy',function(req,res){
+    var query="SELECT earliest_delivery FROM mydb.category where cat_name='Dairy'";
+    handle_database(query,req,res);
+});
+app.get('/getDeliveryVegetable',function(req,res){
+    var query="SELECT earliest_delivery FROM mydb.category where cat_name='Vegetable'";
+    handle_database(query,req,res);
+});
+app.get('/getDeliveryMeat',function(req,res){
+    var query="SELECT earliest_delivery FROM mydb.category where cat_name='Meat'";
+    handle_database(query,req,res);
+});
+app.get('/getDeliveryLaundry',function(req,res){
+    var query="SELECT earliest_delivery FROM mydb.category where cat_name='Laundry'";
+    handle_database(query,req,res);
+});
 
 app.get('/getDairy', function(req,res){
     var query = "select * from category_detail where sub_category_name = 'Dairy'";
