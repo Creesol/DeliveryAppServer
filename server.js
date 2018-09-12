@@ -339,7 +339,7 @@ app.get('/getAllFrozenVeg', function (req, res) {
                                    
 
                                     if (!err) {
-                                       connection.release();
+                                      
 
                                         var query4="select from mydb.order"
 
