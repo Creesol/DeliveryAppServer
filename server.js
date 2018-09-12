@@ -261,6 +261,7 @@ app.get('/getAllFrozenVeg', function (req, res) {
                        // res.json({ "user_id": results.user_id });
                         var query2="select * from mydb.user_info where user_id="+mysql.escape(result.insertId);
                         connection.query(query2,function(err,result){
+                            connection.release();
                             res.send(result[0]);
                         });
                                          
@@ -335,6 +336,7 @@ app.get('/getAllFrozenVeg', function (req, res) {
 
                                 var query3 = "Insert into mydb.order_detail(product_name,price,_order_id,quantity,Instructions) values(" + mysql.escape(obj.item_name) + "," + mysql.escape(obj.item_price) + "," + results.insertId + "," + obj.item_quantity + ","+mysql.escape(obj.instruct)+")";
                                 connection.query(query3, function (err, results) {
+                                    connection.release();
 
                                     if (!err) {
                                       
@@ -412,6 +414,7 @@ app.get('/getUserData', function (req, res) {
                 connection.query(sql1, function (err, result) {
                     if (!err) {
                         //sendNotification(req.query.token);
+                        connection.release();
                         res.json(result[0]);
                     }
                     else {
@@ -466,6 +469,7 @@ app.get('/getOrderData', function (req, res) {
 
                         data.push(result[0]);
                         if (data.length == data2) {
+                            connection.release();
                             res.send(data);
                         }
                         console.log("data-----------------------------------------------------------------------------------------------------------------------" + data);
@@ -479,6 +483,7 @@ app.get('/getOrderData', function (req, res) {
                 //res.send(JSON.stringify(data));
             }
             else {
+                connection.release();
                 res.send("You havent Ordered anything");
                 
         
@@ -498,6 +503,7 @@ app.get('/CheckNumber', function (req, res) {
     con.getConnection(function (err, connection) {
         if (err) {
              console.log(err);
+            connection.release();
             res.json({ "code": 100, "status": "Error in connection database" });
             return;
         }
