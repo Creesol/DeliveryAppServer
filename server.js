@@ -468,8 +468,9 @@ app.get('/getOrderData', function (req, res) {
                         console.log(result[0]);
 
                         data.push(result[0]);
+                        
                         if (data.length == data2) {
-                            connection.release();
+                            
                             res.send(data);
                         }
                         console.log("data-----------------------------------------------------------------------------------------------------------------------" + data);
