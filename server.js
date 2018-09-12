@@ -483,7 +483,7 @@ app.get('/getOrderData', function (req, res) {
                 //res.send(JSON.stringify(data));
             }
             else {
-                connection.release();
+               
                 res.send("You havent Ordered anything");
                 
         
