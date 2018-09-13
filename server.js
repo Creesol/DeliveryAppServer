@@ -237,7 +237,15 @@ app.get('/getAllFrozenVeg', function (req, res) {
         handle_database(query, req, res);
     });
 
-   
+   app.get('/getFrozenFries', function(req,res){
+    var query = "select * from category_detail where sub_category_name = 'FrozenFries' LIMIT 7";
+    handle_database(query, req, res);
+});
+
+app.get('/getAllFrozenFries', function (req, res) {
+    var query = "select * from category_detail where sub_category_name = 'FrozenFries' LIMIT 9  OFFSET 7";
+    handle_database(query, req, res);
+});
   
 
 
