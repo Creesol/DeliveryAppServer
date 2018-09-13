@@ -253,7 +253,7 @@ app.get('/getFrozenKN', function(req,res){
 });
 
 app.get('/getAllFrozenKN', function (req, res) {
-    var query = "select * from category_detail where sub_category_name = 'FrozenMeatKN' LIMIT 9  OFFSET 7";
+    var query = "select * from category_detail where sub_category_name = 'FrozenMeatKN' LIMIT 10  OFFSET 7";
     handle_database(query, req, res);
 });
 
