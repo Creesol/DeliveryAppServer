@@ -246,10 +246,46 @@ app.get('/getAllFrozenFries', function (req, res) {
     var query = "select * from category_detail where sub_category_name = 'FrozenFries' LIMIT 9  OFFSET 7";
     handle_database(query, req, res);
 });
-  
 
+app.get('/getFrozenKN', function(req,res){
+    var query = "select * from category_detail where sub_category_name = 'FrozenMeatKN' LIMIT 7";
+    handle_database(query, req, res);
+});
 
+app.get('/getAllFrozenKN', function (req, res) {
+    var query = "select * from category_detail where sub_category_name = 'FrozenMeatKN' LIMIT 9  OFFSET 7";
+    handle_database(query, req, res);
+});
 
+app.get('/getFrozenMenu', function(req,res){
+    var query = "select * from category_detail where sub_category_name = 'FrozenMeatmenu' LIMIT 7";
+    handle_database(query, req, res);
+});
+
+app.get('/getAllFrozenMenu', function (req, res) {
+    var query = "select * from category_detail where sub_category_name = 'FrozenMeatmenu' LIMIT 9  OFFSET 7";
+    handle_database(query, req, res);
+});
+
+app.get('/getFrozenMon', function(req,res){
+    var query = "select * from category_detail where sub_category_name = 'FrozenMeatmon' LIMIT 7";
+    handle_database(query, req, res);
+});
+
+app.get('/getAllFrozenMon', function (req, res) {
+    var query = "select * from category_detail where sub_category_name = 'FrozenMeatmon' LIMIT 9  OFFSET 7";
+    handle_database(query, req, res);
+});
+
+app.get('/getFrozenDawn', function(req,res){
+    var query = "select * from category_detail where sub_category_name = 'FrozenMeatda' LIMIT 7";
+    handle_database(query, req, res);
+});
+
+app.get('/getAllFrozenDawn', function (req, res) {
+    var query = "select * from category_detail where sub_category_name = 'FrozenMeatda' LIMIT 9  OFFSET 7";
+    handle_database(query, req, res);
+});
           
 
             app.post('/postUserData', function (req, res) {
