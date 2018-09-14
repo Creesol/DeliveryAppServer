@@ -626,7 +626,7 @@ function sendNotification(token) {
         var message = {
             "to": token,
             "notification": {
-                "body": "Thanks for ordering with us",
+                "body": "Thanks for ordering with Knock.",
                 "title": "Knock ! ",
                 "content_available": true,
                 "priority": "high",
