@@ -186,6 +186,11 @@ app.get('/getAllVegetable', function(req,res){
     handle_database(query, req, res);
 });
 
+app.get('/getBasket', function(req,res){
+    var query = "select * from category_detail where sub_category_name = 'basket' LIMIT 7";
+    handle_database(query, req, res);
+});
+
 app.get('/getFrozenVeg', function(req,res){
     var query = "select * from category_detail where sub_category_name = 'FrozenVeg' LIMIT 7";
     handle_database(query, req, res);
