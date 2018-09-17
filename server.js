@@ -291,6 +291,26 @@ app.get('/getAllFrozenDawn', function (req, res) {
     var query = "select * from category_detail where sub_category_name = 'FrozenMeatda' LIMIT 10  OFFSET 7";
     handle_database(query, req, res);
 });
+
+app.get('/getWash', function(req,res){
+    var query = "select * from category_detail where sub_category_name = 'Wash' LIMIT 7";
+    handle_database(query, req, res);
+});
+
+app.get('/getAllWash', function (req, res) {
+    var query = "select * from category_detail where sub_category_name = 'Wash' LIMIT 10  OFFSET 7";
+    handle_database(query, req, res);
+});
+
+app.get('/getIron', function(req,res){
+    var query = "select * from category_detail where sub_category_name = 'Iron' LIMIT 7";
+    handle_database(query, req, res);
+});
+
+app.get('/getAllIron', function (req, res) {
+    var query = "select * from category_detail where sub_category_name = 'Iron' LIMIT 10  OFFSET 7";
+    handle_database(query, req, res);
+});
           
 
             app.post('/postUserData', function (req, res) {
