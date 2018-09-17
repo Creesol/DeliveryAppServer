@@ -311,6 +311,11 @@ app.get('/getAllIron', function (req, res) {
     var query = "select * from category_detail where sub_category_name = 'Iron' LIMIT 10  OFFSET 7";
     handle_database(query, req, res);
 });
+
+app.get('/getAllUsers', function (req, res) {
+    var query = "select * from user_info";
+    handle_database(query, req, res);
+});
           
 
             app.post('/postUserData', function (req, res) {
