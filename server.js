@@ -575,6 +575,7 @@ app.get('/getOrderData', function (req, res) {
 
 app.get('/CheckNumber', function (req, res) {
     var check = "select * from user_info where phone_no=" + mysql.escape(req.query.phone);
+    console.log(mysql.escape(req.query.phone));
     con.getConnection(function (err, connection) {
         if (err) {
              console.log(err);
