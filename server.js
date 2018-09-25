@@ -283,7 +283,7 @@ app.get('/getAllFrozenMon', function (req, res) {
 });
 
 app.get('/getFrozenDawn', function(req,res){
-    var query = "select * from category_detail where sub_category_name = 'FrozenMeatda' LIMIT 6";
+    var query = "select * from category_detail where sub_category_name = 'FrozenMeatda' LIMIT 5";
     handle_database(query, req, res);
 });
 
