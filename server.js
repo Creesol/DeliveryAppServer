@@ -859,6 +859,24 @@ app.get('/getAdminLoginData',function(req,res){
         })
      })
 })
+app.get('/postAdminToken',function(req,res){
+    var query2="UPDATE `mydb`.`admin` SET `token`=" + mysql.escape(req.query.token) + " WHERE `admin_id`="+req.query.admin_id;
+     con.getConnection(function (err, connection) {
+        if (err) {
+             console.log(err);
+            res.json({ "code": 100, "status": "Error in connection database" });
+            return;
+        }
+
+        console.log('connected as id ' + connection.threadId);
+
+        connection.query(query2, function (err, result) {
+             connection.release();
+            res.send(result);
+        })
+     })
+})
+
 app.get('/AdminLoginTruthOrFalse',function(req,res){
     var query="SELECT count(admin_id) as total,admin_id FROM mydb.admin where (name="+mysql.escape(req.query.name)+" And password="+mysql.escape(req.query.pass)+")";
      con.getConnection(function (err, connection) {
@@ -873,12 +891,10 @@ app.get('/AdminLoginTruthOrFalse',function(req,res){
         connection.query(query, function (err, result) {
              
             if(result[0].total==1){
-                var query2="UPDATE `mydb`.`admin` SET `token`='awxe34567890' WHERE `admin_id`="+result[0].admin_id;
+                
                 //res.send("true");
-                connection.query(query2, function (err, result) {
-             connection.release();
-                    res.send(result);
-                })
+                res.send(result[0]);
+                
             }
             else{
                 res.send("false");
