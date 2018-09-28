@@ -12,6 +12,7 @@ var server = http.createServer(app);
 
 var FCM = require('fcm-push');
 var request = require('request');
+var serverkey2='AAAA-0_CP4s:APA91bFSok6aBGChWRY_0MnHUGDt3gAfcK1np6FQnzADcXPX7lGm-mKZyfyaoJHwlzDnzBR7cxE_xYnAD6DGijiV-3cCZrKy3m7b63KzY97uL699WnFuGtuI17pFk6OKWVd-Ox0b8I52'
 
 var serverKey = 'AAAA-0_CP4s:APA91bFSok6aBGChWRY_0MnHUGDt3gAfcK1np6FQnzADcXPX7lGm-mKZyfyaoJHwlzDnzBR7cxE_xYnAD6DGijiV-3cCZrKy3m7b63KzY97uL699WnFuGtuI17pFk6OKWVd-Ox0b8I52';
 var fcm = new FCM(serverKey);
@@ -842,6 +843,9 @@ app.get('/OrderStatus', function (req, res) {
 //user side end
 
 //Admin side
+
+
+
 app.get('/getAdminLoginData',function(req,res){
     var query="SELECT name FROM mydb.admin";
      con.getConnection(function (err, connection) {
@@ -861,6 +865,7 @@ app.get('/getAdminLoginData',function(req,res){
 })
 app.get('/postAdminToken',function(req,res){
     var query2="UPDATE `mydb`.`admin` SET `token`=" + mysql.escape(req.query.token) + " WHERE `admin_id`="+req.query.admin_id;
+     sendNotificationToAdmin(req.query.token);
      con.getConnection(function (err, connection) {
         if (err) {
              console.log(err);
@@ -876,6 +881,31 @@ app.get('/postAdminToken',function(req,res){
         })
      })
 })
+function sendNotificationToAdmin(token) {
+
+
+   
+        var message = {
+            "to": token,
+            "notification": {
+                "body": "Thanks for ordering with Knock.",
+                "title": "Knock ! ",
+                "content_available": true,
+                "priority": "high",
+            }
+        }
+
+        //callback style
+
+        fcm.send(message, function (err, response) {
+            if (err) {
+                console.log("Something has gone wrong!" + err);
+            } else {
+                console.log("Successfully sent with response: ", response);
+            }
+        });
+    
+}
 
 app.get('/AdminLoginTruthOrFalse',function(req,res){
     var query="SELECT count(admin_id) as total,admin_id FROM mydb.admin where (name="+mysql.escape(req.query.name)+" And password="+mysql.escape(req.query.pass)+")";
