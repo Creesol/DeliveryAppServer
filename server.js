@@ -841,6 +841,24 @@ app.get('/OrderStatus', function (req, res) {
 })
 //user side end
 
+//Admin side
+app.get('/getAdminLoginData',function(req,res){
+    var query="SELECT name FROM mydb.admin";
+     con.getConnection(function (err, connection) {
+        if (err) {
+             console.log(err);
+            res.json({ "code": 100, "status": "Error in connection database" });
+            return;
+        }
+
+        console.log('connected as id ' + connection.threadId);
+
+        connection.query(query, function (err, result) {
+             connection.release();
+            res.send(result);
+        })
+     })
+})
 //Delivery side
 app.get('/OrderLocation', function (req, res) {
     var query="SELECT order_id,latitude,longitude FROM mydb.`order` where orderStatus=1";
