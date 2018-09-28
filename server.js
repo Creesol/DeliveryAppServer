@@ -871,9 +871,14 @@ app.get('/AdminLoginTruthOrFalse',function(req,res){
         console.log('connected as id ' + connection.threadId);
 
         connection.query(query, function (err, result) {
-             connection.release();
+             
             if(result[0].total==1){
-                res.send("true");
+                var query2="UPDATE `mydb`.`admin` SET `token`='awxe34567890' WHERE `admin_id`="+result[0].admin_id;
+                //res.send("true");
+                connection.query(query2, function (err, result) {
+             connection.release();
+                    res.send(result);
+                })
             }
             else{
                 res.send("false");
