@@ -860,7 +860,7 @@ app.get('/getAdminLoginData',function(req,res){
      })
 })
 app.get('/AdminLoginTruthOrFalse',function(req,res){
-    var query="SELECT count(admin_id) as total FROM mydb.admin where (name="+mysql.escape(req.query.name)+" And password="+mysql.escape(req.query.pass)+")";
+    var query="SELECT count(admin_id) as total,admin_id FROM mydb.admin where (name="+mysql.escape(req.query.name)+" And password="+mysql.escape(req.query.pass)+")";
      con.getConnection(function (err, connection) {
         if (err) {
              console.log(err);
