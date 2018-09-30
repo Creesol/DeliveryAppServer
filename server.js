@@ -933,6 +933,24 @@ app.get('/AdminLoginTruthOrFalse',function(req,res){
         })
      })
 })
+app.get('/getAllOrders', function (req, res) {
+    var query="select order_id,total_price,DATE_FORMAT(orderdate, '%Y-%m-%d') AS dated,DATE_FORMAT(orderdate,'%H:%i:%s') AS timed FROM mydb.order";
+     con.getConnection(function (err, connection) {
+        if (err) {
+             console.log(err);
+            res.json({ "code": 100, "status": "Error in connection database" });
+            return;
+        }
+
+        console.log('connected as id ' + connection.threadId);
+
+        connection.query(query, function (err, rows) {
+             connection.release();
+            res.send(rows);
+        })
+     })
+   
+});
 
 //Delivery side
 app.get('/OrderLocation', function (req, res) {
