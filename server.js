@@ -952,7 +952,7 @@ app.get('/getAllOrders', function (req, res) {
    
 });
 app.get('/getAllItems', function (req, res) {
-    var query="SELECT product_name, count(*),price FROM mydb.order_detail GROUP BY product_name";
+    var query="SELECT product_name, count(*) AS ItemCount,price FROM mydb.order_detail GROUP BY product_name";
      con.getConnection(function (err, connection) {
         if (err) {
              console.log(err);
