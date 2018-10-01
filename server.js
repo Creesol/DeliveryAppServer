@@ -294,7 +294,7 @@ app.get('/getAllFrozenDawn', function (req, res) {
 });
 
 app.get('/getFrozenMore', function(req,res){
-    var query = "select * from category_detail where sub_category_name = ''FrozenMeatMore' LIMIT 7";
+    var query = "select * from category_detail where sub_category_name = 'FrozenMeatMore' LIMIT 7";
     handle_database(query, req, res);
 });
 app.get('/getAllFrozenMore', function(req,res){
