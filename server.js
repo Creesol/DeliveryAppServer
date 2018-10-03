@@ -920,7 +920,7 @@ app.get('/UpdatePrice', function (req, res) {
 });
 
 app.get('/UpdateItemData', function (req, res) {
-    var query="UPDATE `mydb`.`category_detail` SET `name`="+mysql.escape(req.body.name)+", `image`="+mysql.escape(req.body.image)+", `description`="+mysql.escape(req.body.desc)+", `measuring_unit`="+mysql.escape(req.body.measure)+", `updated_price`="+mysql.escape(req.body.rate)+", `sub_category_name`="+mysql.escape(req.body.subcat)+", `quantity`="+mysql.escape(req.body.quantity)+" WHERE `item_id`="mysql.escape(req.body.itemId);
+    var query="UPDATE `mydb`.`category_detail` SET `name`="+mysql.escape(req.body.name)+", `image`="+mysql.escape(req.body.image)+", `description`="+mysql.escape(req.body.desc)+", `measuring_unit`="+mysql.escape(req.body.measure)+", `updated_price`="+mysql.escape(req.body.rate)+", `sub_category_name`="+mysql.escape(req.body.subcat)+", `quantity`="+mysql.escape(req.body.quantity)+" WHERE `item_id`="+mysql.escape(req.body.itemId);
     
     con.getConnection(function (err, connection) {
         if (err) {
