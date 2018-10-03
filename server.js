@@ -876,6 +876,117 @@ app.get('/getWeekData', function (req, res) {
    
 });
 
+app.get('/CategorySpinner', function (req, res) {
+    var query="SELECT cat_name,cat_id FROM mydb.category";     
+    con.getConnection(function (err, connection) {
+        if (err) {
+             console.log(err);
+            res.json({ "code": 100, "status": "Error in connection database" });
+            return;
+        }
+
+        console.log('connected as id ' + connection.threadId);
+
+        connection.query(query, function (err, result) {
+            console.log(result);
+            connection.release();
+            res.send(result);
+            
+        })
+     })
+   
+});
+
+
+app.get('/UpdatePrice', function (req, res) {
+    var query="UPDATE `mydb`.`category_detail` SET `updated_price`="+mysql.escape(req.body.rate)+"WHERE `item_id`="+mysql.escape(req.body.itemId);     
+    con.getConnection(function (err, connection) {
+        if (err) {
+             console.log(err);
+            res.json({ "code": 100, "status": "Error in connection database" });
+            return;
+        }
+
+        console.log('connected as id ' + connection.threadId);
+
+        connection.query(query, function (err, result) {
+            console.log(result);
+            connection.release();
+            res.send(result);
+            
+        })
+     })
+   
+});
+
+app.get('/UpdateItemData', function (req, res) {
+    var query="UPDATE `mydb`.`category_detail` SET `name`="+mysql.escape(req.body.name)+", `image`="+mysql.escape(req.body.image)+", `description`="+mysql.escape(req.body.desc)+", `measuring_unit`="+mysql.escape(req.body.measure)+", `updated_price`="+mysql.escape(req.body.rate)+", `sub_category_name`="+mysql.escape(req.body.subcat)+", `quantity`="+mysql.escape(req.body.quantity)+" WHERE `item_id`="mysql.escape(req.body.itemId);
+    
+    con.getConnection(function (err, connection) {
+        if (err) {
+             console.log(err);
+            res.json({ "code": 100, "status": "Error in connection database" });
+            return;
+        }
+
+        console.log('connected as id ' + connection.threadId);
+
+        connection.query(query, function (err, result) {
+            console.log(result);
+            connection.release();
+            res.send(result);
+            
+        })
+     })
+   
+});
+
+
+
+app.get('/subCategorySpinner', function (req, res) {
+    var query="SELECT  distinct sub_category_name FROM mydb.category_detail";     
+    con.getConnection(function (err, connection) {
+        if (err) {
+             console.log(err);
+            res.json({ "code": 100, "status": "Error in connection database" });
+            return;
+        }
+
+        console.log('connected as id ' + connection.threadId);
+
+        connection.query(query, function (err, result) {
+            console.log(result);
+            connection.release();
+            res.send(result);
+            
+        })
+     })
+   
+});
+
+
+app.get('/insertNewItem', function (req, res) {
+    var query="INSERT INTO `mydb`.`category_detail` (`name`, `image`, `description`, `measuring_unit`, `updated_price`, `sub_category_name`, `_cat_id`, `quantity`) VALUES ("+mysql.escape(req.body.name)+","+ mysql.escape(req.body.image)+","+ mysql.escape(req.body.desc)+","+mysql.escape(req.body.measure)+","+mysql.escape(req.body.rate)+","+mysql.escape(req.body.subcat)+","+mysql.escape(req.body.catId)+","+mysql.escape(req.body.quantity)+")";   
+    con.getConnection(function (err, connection) {
+        if (err) {
+             console.log(err);
+            res.json({ "code": 100, "status": "Error in connection database" });
+            return;
+        }
+
+        console.log('connected as id ' + connection.threadId);
+
+        connection.query(query, function (err, result) {
+            console.log(result);
+            connection.release();
+            res.send(result);
+            
+        })
+     })
+   
+});
+
+
 
 
 app.get('/getAdminLoginData',function(req,res){
