@@ -856,7 +856,7 @@ app.get('/OrderStatus', function (req, res) {
 
 
 app.get('/getWeekData', function (req, res) {
-    var query="SELECT count(distinct orderdate) as Orders, DATE_FORMAT(orderdate, '%Y-%m-%d') AS dated FROM `order` where DATE(`orderdate`) >= curdate() - INTERVAL DAYOFWEEK(curdate())+4 DAY and  month(orderdate)!=month(curdate()) GROUP BY  DAY(orderdate) ";
+    var query="SELECT count(distinct orderdate) as Orders, DATE_FORMAT(orderdate, '%Y-%m-%d') AS dated FROM `order` where DATE(`orderdate`) >= curdate() - INTERVAL DAYOFWEEK(curdate())+1 DAY  GROUP BY  DAY(orderdate)";
      con.getConnection(function (err, connection) {
         if (err) {
              console.log(err);
