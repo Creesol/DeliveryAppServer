@@ -328,7 +328,7 @@ app.get('/getAllUsers', function (req, res) {
 });
 
 app.get('/getCartName', function (req, res) {
-    var query = "SELECT distinct sub_category_name FROM mydb.category_detail where _cat_id=3  LIMIT 2 OFFSET " + mysql.escape(req.query.quan);
+    var query = "SELECT distinct sub_category_name FROM mydb.category_detail where _cat_id=3 LIMIT 2 OFFSET " + mysql.escape(req.query.quan);
     handle_database(query, req, res);
 });
 app.get('/getCartNameDetail', function (req, res) {
