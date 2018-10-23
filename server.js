@@ -328,6 +328,24 @@ app.get('/getAllUsers', function (req, res) {
 });
 
 app.get('/getCartName', function (req, res) {
+    var query2="select count(distinct sub_category_name) as length FROM mydb.category_detail where _cat_id=3";
+     con.getConnection(function (err, connection) {
+        if (err) {
+             console.log(err);
+            res.json({ "code": 100, "status": "Error in connection database" });
+            return;
+        }
+
+        console.log('connected as id ' + connection.threadId);
+
+        connection.query(query2, function (err, result) {
+            console.log(result);
+            connection.release();
+            res.send(result);
+            
+        })
+     })
+    
     var query = "SELECT distinct sub_category_name FROM mydb.category_detail where _cat_id=3 LIMIT 2 OFFSET "+ req.query.quan;
     handle_database(query, req, res);
 });
