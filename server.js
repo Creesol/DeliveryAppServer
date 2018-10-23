@@ -341,6 +341,7 @@ app.get('/getCartName', function (req, res) {
         connection.query(query2, function (err, result) {
             console.log(result);
             connection.release();
+            res.send(result[0].length);
             res.send(result);
             
         })
