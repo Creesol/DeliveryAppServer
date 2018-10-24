@@ -328,7 +328,7 @@ app.get('/getAllUsers', function (req, res) {
 });
 
 app.get('/getCartName', function (req, res) {
-    var query2="select count(distinct sub_category_name) as length FROM mydb.category_detail where _cat_id=3";
+   /* var query2="select count(distinct sub_category_name) as length FROM mydb.category_detail where _cat_id=3";
      con.getConnection(function (err, connection) {
         if (err) {
              console.log(err);
@@ -341,16 +341,17 @@ app.get('/getCartName', function (req, res) {
         connection.query(query2, function (err, result) {
             console.log(result);
             connection.release();
-            if(result[0].length>=req.query.quan){
+            if(result[0].length>=req.query.quan){*/
              var query = "SELECT distinct sub_category_name FROM mydb.category_detail where _cat_id=3 LIMIT 2 OFFSET "+ req.query.quan;
     handle_database(query, req, res);
+    /*
             }
             else{
                 res.send([{"code":2}]);
             }
             
         })
-     })
+     })*/
     
    
 });
