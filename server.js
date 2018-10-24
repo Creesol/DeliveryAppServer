@@ -342,7 +342,7 @@ app.get('/getCartName', function (req, res) {
             console.log(result);
             connection.release();
             if(result[0].length>=req.query.quan){*/
-             var query = "SELECT distinct sub_category_name FROM mydb.category_detail where _cat_id=3 LIMIT 2 OFFSET "+ req.query.quan;
+             var query = "SELECT distinct sub_category_name FROM mydb.category_detail where _cat_id=3";
     handle_database(query, req, res);
     /*
             }
