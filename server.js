@@ -212,13 +212,13 @@ app.get('/getAllFrozenVeg', function (req, res) {
         handle_database(query, req, res);
     });
 
-    app.get('/getDryClean', function (req, res) {
-        var query = "select * from category_detail where sub_category_name = 'Dry Clean' LIMIT 7";
+    app.get('/getWashandironLadies', function (req, res) {
+        var query = "select * from category_detail where sub_category_name = 'WashandironLadies' LIMIT 7";
         handle_database(query, req, res);
     });
 
-    app.get('/getAllDryClean', function (req, res) {
-        var query = "select * from category_detail where sub_category_name = 'Dry Clean' LIMIT 10  OFFSET 7";
+    app.get('/getAllWashandironLadies', function (req, res) {
+        var query = "select * from category_detail where sub_category_name = 'WashandironLadies' LIMIT 10  OFFSET 7";
         handle_database(query, req, res);
     });
 
@@ -302,23 +302,23 @@ app.get('/getAllFrozenMore', function(req,res){
     handle_database(query, req, res);
 });
 
-app.get('/getWash', function(req,res){
-    var query = "select * from category_detail where sub_category_name = 'Wash' LIMIT 7";
+app.get('/getWashandironMen', function(req,res){
+    var query = "select * from category_detail where sub_category_name = 'WashandironMen' LIMIT 7";
     handle_database(query, req, res);
 });
 
-app.get('/getAllWash', function (req, res) {
-    var query = "select * from category_detail where sub_category_name = 'Wash' LIMIT 10  OFFSET 7";
+app.get('/getAllWashandironMen', function (req, res) {
+    var query = "select * from category_detail where sub_category_name = 'WashandironMen' LIMIT 10  OFFSET 7";
     handle_database(query, req, res);
 });
 
-app.get('/getIron', function(req,res){
-    var query = "select * from category_detail where sub_category_name = 'Iron' LIMIT 7";
+app.get('/getIronOnly', function(req,res){
+    var query = "select * from category_detail where sub_category_name = 'IronOnly' LIMIT 7";
     handle_database(query, req, res);
 });
 
-app.get('/getAllIron', function (req, res) {
-    var query = "select * from category_detail where sub_category_name = 'Iron' LIMIT 10  OFFSET 7";
+app.get('/getAllIronOnly', function (req, res) {
+    var query = "select * from category_detail where sub_category_name = 'IronOnly' LIMIT 10  OFFSET 7";
     handle_database(query, req, res);
 });
 
