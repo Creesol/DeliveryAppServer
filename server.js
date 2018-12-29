@@ -168,12 +168,12 @@ app.get('/getAllFrozenMeat', function(req,res){
 });
 
 app.get('/getFruit', function(req,res){
-    var query = "select * from category_detail where sub_category_name = 'Fruit' LIMIT 10";
+    var query = "select * from category_detail where sub_category_name = 'Fruit' LIMIT 7";
     handle_database(query, req, res);
 });
 
 app.get('/getAllFruit', function(req,res){
-    var query = "select * from category_detail where sub_category_name = 'Fruit' LIMIT 14  OFFSET 7";
+    var query = "select * from category_detail where sub_category_name = 'Fruit' LIMIT 10  OFFSET 7";
     handle_database(query, req, res);
 });
 
