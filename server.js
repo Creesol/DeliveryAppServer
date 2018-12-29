@@ -212,16 +212,6 @@ app.get('/getAllFrozenVeg', function (req, res) {
         handle_database(query, req, res);
     });
 
-    app.get('/getWashandironLadies', function (req, res) {
-        var query = "select * from category_detail where sub_category_name = 'WashandironLadies' LIMIT 7";
-        handle_database(query, req, res);
-    });
-
-    app.get('/getAllWashandironLadies', function (req, res) {
-        var query = "select * from category_detail where sub_category_name = 'WashandironLadies' LIMIT 10  OFFSET 7";
-        handle_database(query, req, res);
-    });
-
     app.get('/getDairySlider', function (req, res) {
         var query = "select * from Sliders where slider_category = 'Dairy'";
         handle_database(query, req, res);
@@ -309,6 +299,16 @@ app.get('/getWashandironMen', function(req,res){
 
 app.get('/getAllWashandironMen', function (req, res) {
     var query = "select * from category_detail where sub_category_name = 'WashandironMen' LIMIT 10  OFFSET 7";
+    handle_database(query, req, res);
+});
+
+app.get('/getWashandironLadies', function (req, res) {
+    var query = "select * from category_detail where sub_category_name = 'WashandironLadies' LIMIT 7";
+    handle_database(query, req, res);
+});
+
+app.get('/getAllWashandironLadies', function (req, res) {
+    var query = "select * from category_detail where sub_category_name = 'WashandironLadies' LIMIT 10  OFFSET 7";
     handle_database(query, req, res);
 });
 
